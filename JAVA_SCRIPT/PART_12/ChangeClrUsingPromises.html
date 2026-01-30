@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Dilkhush Kumar</h1>
+
+    <script>
+        let h1 = document.querySelector("h1");
+        function colorChange(color, delay){
+            return new Promise((resolve, reject)=>{
+                setTimeout(() => {
+                  h1.style.color = color; 
+                  resolve("color changed!"); 
+                }, delay);
+            })
+        };
+        colorChange("red", 1000)
+        .then((result)=>{
+            console.log("color blue : " + result);
+            return colorChange("blue", 1000);
+        })
+        .then((result)=>{
+            console.log("color red : " + result);
+            return colorChange("red", 1000);
+        })
+        .then((result)=>{
+            console.log("color green : " + result);
+            return colorChange("green", 1000);
+        })
+        .then((result)=>{
+            console.log("color yellow : " + result);
+            return colorChange("yellow", 1000);
+        })
+        .then((result)=>{
+            console.log("color cyan : " + result);
+            return colorChange("cyan", 1000);
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            width: 600px;
+            height: 200px;
+            border: 2px solid rgb(204, 6, 164);
+            background-color: tomato;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+        
+        </style>
+</head>
+<body>
+    <div class="container"></div>
+    <script>
+        let container = document.querySelector(".container");
+        // container.addEventListener("mouseout", function(event){
+        //     console.log("mouseout is running")
+        // })
+        container.addEventListener("keypress", function(event){
+            console.log("Keypress is running")
+        })
+        container.addEventListener("scroll", function(event){
+            console.log("scroll is running")
+        })
+        container.addEventListener("load", function(event){
+            console.log("load is running")
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <h1>Random Dogs Image</h1>
+    <button>Change Image</button>
+    <img id="result" alt="">
+    <script>
+        let url = "https://dog.ceo/api/breeds/image/random";
+        let btn = document.querySelector("button");
+        let para = document.querySelector("p");
+        btn.addEventListener("click", async ()=>{
+            let url = await getImage();
+            let img = document.querySelector("#result");
+            img.setAttribute("src", url);            
+        });
+        async function getImage(){
+            try {
+                let res = await axios.get(url);
+                return res.data.message;
+            } catch(e){
+                console.log("error - ", e);
+                return "/"
+            }
+        }
+    </script>
+</body>
+
+</html>

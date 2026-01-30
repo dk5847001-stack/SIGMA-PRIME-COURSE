@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let body = document.querySelector('body');
+        body.style.backgroundColor = 'gray';
+        let input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = 'Enter your name...';
+        let btn = document.createElement('button');
+        btn.innerText = "click me";
+        body.append(input);
+        body.append(btn);
+        input.style.padding = "10px 20px"
+        btn.style.padding = "10px 20px"
+        btn.style.marginLeft = "10px"
+        btn.style.cursor = "pointer";
+        btn.style.borderRadius = "5px";
+        btn.style.border = "none";
+        btn.style.backgroundColor = "blue";
+        btn.style.color = "white";
+        input.style.borderRadius = "5px";
+        input.style.border = "none";
+        input.style.boxShadow = "0 10px 30px rgba(0,0,0,0.4)";
+        btn.style.boxShadow = "0 10px 30px rgba(0,0,0,0.4)";
+        btn.addEventListener("click", ()=>{
+            alert(`${input.value}, welcome to our site!`);
+        })
+    </script>
+</body>
+</html>

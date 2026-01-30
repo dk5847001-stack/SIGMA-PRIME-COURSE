@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 20px;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        form{
+            width: 350px;
+            min-height: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        input{
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            width: 300px;
+        }
+        button{
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+        }
+        span{
+            margin-top: 10px;
+            font-size: 18px;
+            color: #333;
+            width: 300px;
+            min-height: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        span p{
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<form action="/activity.html">
+    <input type="text" name="name" id="name" placeholder="Enter your name">
+    <button>Submit</button>
+    <span>
+        <p></p>
+    </span>
+    <script>
+        let form = document.querySelector("form");
+        form.addEventListener("submit", function(event){
+            event.preventDefault();
+        });
+        let userInput = document.querySelector("#name");
+        userInput.addEventListener("change", function(event){
+            alert(" changed to: " + this.value);
+            console.log('The final value is : ', event.target.value);
+            
+        })
+        let spanPara = document.querySelector("span p");
+        userInput.addEventListener("input", function(event){
+            console.log('The final value is : ', event.target.value);
+            spanPara.textContent = this.value;
+        })
+    </script>
+</form>
+</body>
+</html>

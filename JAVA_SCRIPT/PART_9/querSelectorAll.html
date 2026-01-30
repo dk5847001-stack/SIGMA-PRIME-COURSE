@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .red{
+            color: red;
+        }
+        .border{
+            border: 2px solid white;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            width: fit-content;
+        }
+    </style>
+</head>
+<body>
+    <h4>hello everyone i'm h4</h4>
+    <h4>hello everyone i'm h4</h4>
+    <h4>hello everyone i'm h4</h4>
+    <h4>hello everyone i'm h4</h4>
+    <h4>hello everyone i'm h4</h4>
+    <h4>hello everyone i'm h4</h4>
+    <h4>hello everyone i'm h4</h4>
+    <h4>hello everyone i'm h4</h4>
+    <h4>hello everyone i'm h4</h4>
+    <h4>hello everyone i'm h4</h4>
+    <h4>hello everyone i'm h4</h4>
+    <h4>hello everyone i'm h4</h4>
+
+    <script>
+        let body = document.querySelector('body');
+        body.style.backgroundColor = 'black';
+        body.style.color = 'white';
+        let h4 = document.querySelectorAll('h4');
+        for(let i = 0; i <h4.length; i++){
+            h4[i].classList.add("red");
+        }
+        h4[0].setAttribute('src', "coderashiq.page.gd");
+        console.log(h4[1].classList.contains('green'));
+        h4[1].classList.toggle('red');
+        h4[2].classList.remove('red');
+        console.log(h4[0].parentElement);
+        console.log(body.children[4].classList.remove('red'));
+        console.log(h4[5].nextElementSibling);
+        console.log(h4[5].previousElementSibling);
+        h4[3].classList.toggle('border');
+        let btn = document.createElement('button')
+        btn.innerText = "Click Me";
+        body.append(btn);
+        h4[3].prepend(btn);
+        h4[3].append(btn);
+        // h4[3].insertAdjacentElement('beforebegin', btn);
+        h4[3].insertAdjacentElement('beforeend', btn);
+        // h4[3].insertAdjacentElement('beforebegin', btn);
+        // h4[3].insertAdjacentElement('beforebegin', btn);
+        h4[1].remove();
+        
+        
+    </script>
+</body>
+</html>

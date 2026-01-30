@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 20px;
+            background-color: #f0f0f0;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            width: 50%;
+            margin: auto;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            width: 50%;
+            margin: auto;
+        }
+        .container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <input type="text" id="inputField" placeholder="Type something..." />
+    <button>Submit</button>
+    </div>
+    <script>
+        let inp = document.querySelector("input");
+        inp.addEventListener("keydown", function(event){
+            // console.log(`Key "${event.key}" pressed`);
+            console.log(`Key "${event.code}" pressed`);
+            if(event.code == "KeyU"){
+                alert("Character move upward");
+            } else if(event.code == "KeyD"){
+                alert("Character move downward");
+            } else if(event.code == "KeyL"){
+                alert("Character move left");
+            } else if(event.code == "KeyR"){
+                alert("Character move right");
+            } else if(event.code == "Enter"){
+                alert("Form submitted");
+            }
+        })
+    </script>
+</body>
+</html>

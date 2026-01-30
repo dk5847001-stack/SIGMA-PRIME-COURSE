@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-self: center;
+            align-items: center;
+            background-color: rgb(233, 160, 223);
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contaier {
+            width: 600px;
+            height: 200px;
+            border: 2px solid black;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: rgb(99, 237, 237);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .color {
+            width: 250px;
+            height: 80px;
+            border: 2px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            margin-top: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="color">
+        <span></span>
+    </div>
+    <div class="btn">
+        <button>Generate Color</button>
+    </div>
+    <div class="contaier">
+
+    </div>
+
+    <script>
+        let body = document.querySelector("body");
+        let btn = document.querySelector("button");
+        let colorBox = document.querySelector(".contaier");
+        let colorSpan = document.querySelector(".color span");
+        btn.addEventListener("click", () => {
+            let clr1 = Math.floor(Math.random() * 256);
+            let clr2 = Math.floor(Math.random() * 256);
+            let clr3 = Math.floor(Math.random() * 256);
+            let clr = `rgb(${clr1}, ${clr2}, ${clr3})`;
+            colorBox.style.backgroundColor = clr;
+            // colorSpan.textContent = clr;
+            colorSpan.innerHTML = `<b>${clr}</b>`;
+        })
+    </script>
+</body>
+
+</html>

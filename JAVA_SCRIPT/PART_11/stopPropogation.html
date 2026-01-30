@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 400px;
+            height: 400px;
+            background-color: bisque;
+            border: 3px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+            border-radius: 10px;
+            border: none;
+        }
+
+        ul {
+            width: 300px;
+            height: 300px;
+            background-color: yellow;
+            border: 2px solid black;
+            padding: 10px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+            border-radius: 10px;
+            border: none;
+        }
+
+        li {
+            width: 100px;
+            height: 100px;
+            background-color: aquamarine;
+            border: 1px solid black;
+            padding: 5px;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+            border-radius: 10px;
+            border: none;
+            
+        }
+        li:nth-child(1){
+            animation: identifier 1s ease-in 1s infinite alternate;
+        }
+        li:nth-child(2){
+            animation: identifier 1.5s ease-in-out 1s infinite alternate;
+        }
+        li:nth-child(3){
+            animation: identifier 1s ease 1s infinite alternate;
+        }
+        li:nth-child(4){
+            animation: identifier 1.5s ease-out 1s infinite alternate;
+        }
+        @keyframes identifier {
+            from{
+                transform: translateX(40px);
+                
+            }
+            to{
+            transform: translateX(0px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <ul>
+            <li>home</li>
+            <li>about</li>
+            <li>contect</li>
+            <li>service</li>
+        </ul>
+    </div>
+
+    <script>
+        let div = document.querySelector("div");
+        let ul = document.querySelector("ul");
+        let li = document.querySelectorAll("li");
+        div.addEventListener("click", function (event) {
+            alert("div is clicked!")
+        });
+        ul.addEventListener("click", function (event) {
+            event.stopPropagation();
+            alert("ul is clicked!")
+        });
+        for (list of li) {
+            list.addEventListener("click", function (event) {
+                event.stopPropagation();
+                alert("li is clicked!")
+            });
+        }
+
+    </script>
+</body>
+
+</html>
