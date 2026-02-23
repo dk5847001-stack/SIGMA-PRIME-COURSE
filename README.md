@@ -71,7 +71,7 @@ SIGMA-PRIME-COURSE/
 
 ```bash
 # Clone Repository
-git clone https://github.com/yourusername/SIGMA-PRIME-COURSE.git
+git clone https://github.com/dk5847001-stack/SIGMA-PRIME-COURSE.git
 
 # Enter Folder
 cd SIGMA-PRIME-COURSE
