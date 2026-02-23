@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sim0n Says Game</title>
+    <title>Simon Says Game</title>
     <style>
         * {
             margin: 0;
@@ -106,22 +106,27 @@
         @keyframes identifier {
             0% {
                 transform: translateX(-5px);
+                scale: calc(1.02);
             }
 
             30% {
                 transform: translateX(5px);
+                scale: calc(1.04);
             }
 
             60% {
                 transform: translateX(-5px);
+                scale: calc(1.06);
             }
 
             90% {
                 transform: translateX(5px);
+                scale: calc(1.08);
             }
 
             100% {
                 transform: translateX(-5px);
+                scale: calc(1.19);
             }
         }
     </style>
@@ -153,7 +158,7 @@
         let h2 = document.querySelector("h2");
 
 
-        document.addEventListener("keypress", function () {
+        document.addEventListener("click", function () {
             if (started == false) {
                 console.log('Game satarted!');
                 started = true;
@@ -180,7 +185,7 @@
             level++;
             h2.innerHTML = `Level ${level}`;
 
-            let randIdx = Math.floor(Math.random() * 3);
+            let randIdx = Math.floor(Math.random() * 4);
             let randColor = btns[randIdx];
             let randBtn = document.querySelector(`.${randColor}`);
             gameSeq.push(randColor);
