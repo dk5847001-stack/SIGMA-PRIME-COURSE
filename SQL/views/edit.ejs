@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit about yourself</title>
+    <style>
+        body {
+            background-color: rgba(7, 0, 15, 0.438);
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 10px;
+            min-width: 10px;
+            padding: 20px;
+            margin: 20px;
+            border: 3px solid black;
+            border-radius: 8px 0 8px 0;
+            background-color: goldenrod;
+        }
+
+        form textarea {
+            width: 400px;
+            padding: 5px;
+            margin: 5px;
+            border-radius: 8px 0 8px 0;
+            border: 2px solid black;
+            background-color: gold;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        form input {
+            width: 370px;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 0 8px 0 8px;
+            background-color: gold;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        form button {
+            width: 415px;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 8px 0 8px 0;
+            background-color: gold;
+            font-weight: bolder;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: goldenrod;
+            transition: all .5s;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>you are eligible to edit this user: <b>
+            <%=user.email%>
+        </b></h2>
+    <form method="post" action="/user/<%=user.id%>?_method=PATCH">
+        <textarea name="username"><%=user.username%></textarea>
+        <input type="password" name="password" placeholder="Enter your password">
+        <button>Edit</button>
+    </form>
+</body>
+
+</html>

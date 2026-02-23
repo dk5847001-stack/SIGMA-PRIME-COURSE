@@ -1,0 +1,88 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    font-family: sans-serif;
+}
+body{
+    background-color: rgb(27, 0, 26);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.allpost{
+    display: flex;
+    gap: 10px;
+}
+.quora{
+display: flex;
+justify-content: center;
+}
+.post{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+    width: 700px;
+    height: 300px;
+    box-shadow: 0 0 10px #fff;
+    border-radius: 8px;
+    border: none;    
+    background-color: rgb(62, 60, 60);
+    margin: 10px;
+}
+.post a{
+    padding: 5px 10px;
+    margin: 1px solid #fff;
+    text-decoration: none;
+    color: #8655f8;
+    width: 150px;
+    margin: auto;
+    height: auto;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #fff;
+    background-color: #231a1a;
+}
+.user{
+    background-color: rgb(97, 93, 93);
+    padding: 20px;
+}
+.content{
+    margin-top: 5px;
+    width: 400px;
+    height: 180px;
+    border: 1px solid #fff;
+    border-style: dotted;
+    margin: auto;
+    padding: 5px;
+}
+.addbtn{
+    min-height: 10vh;
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin-top: 20px;
+}
+.addbtn button{
+    padding: 10px 20px;
+    border: 1px solid #fff;
+    border-style: dotted;
+    border-radius: 8px;
+    box-shadow: 0 0 10px beige;
+    background-color: gold;
+}
+.addbtn button a{
+    text-decoration: none;
+    font-weight: 800;
+    color: rgb(143, 226, 19);
+    color: #000000;
+}
+.addbtn button a span{
+    font-size: 50px;
+}

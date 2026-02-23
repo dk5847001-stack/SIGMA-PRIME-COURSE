@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Whatsapp</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<form method="get" action="/chats/new">
+    <button>new chat</button>
+</form>
+
+<div class="toggle-container">
+    <button id="themeToggle">Toggle Mode</button>
+</div>
+
+<div class="chat-container">
+    <% for(let chat of chats){ %>
+        <div class="chat <%= chat.from === 'me' ? 'right' : 'left' %>">
+            
+            <div class="message">
+                <div>
+                    <p><%= chat.msg %></p>
+                </div>
+                
+                <span class="time">From: <%= chat.from %></span>
+                <span class="time">TO: <%= chat.to %></span>
+                <span class="time"> <%= chat.created_at.toString().split(" ")[4] %></span>
+                <span class="time"> <%= chat.created_at.toString().split(" ").slice(0, 4).join("-") %></span>
+                <div class="forms">
+                <form id="form" method="get" action="/chats/<%=chat._id%>/edit">
+                    <button id="btn">Edit</button>
+                </form>
+                <form id="form" method="post" action="/chats/<%=chat._id%>?_method=DELETE">
+                    <button onclick="return confirm('Are you sure you want to delete?')" id="btn">Delete</button>
+                </form>
+                </div>
+            </div>
+
+        </div>
+    <% } %>
+
+    <!-- Typing animation -->
+    <div class="typing">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+</div>
+
+</body>
+<script src="/app.js"></script>
+</html>

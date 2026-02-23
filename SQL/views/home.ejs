@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home-Page</title>
+    <style>
+        body{
+            background-color: rgba(0, 0, 0, 0.801);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+        button{
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            box-shadow: inset 0px 10px 10px black;
+            margin: 10px;
+            color: rgb(67, 110, 1);
+            font-weight: bold;
+        }
+        form{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+        form input{
+            padding: 10px 20px;
+            border-radius: 0 8px 0 8px;
+            border-bottom: 3px solid rgb(1, 121, 13);
+            border-top: 3px solid rgb(151, 0, 126);
+            border-left: 3px solid rgb(151, 86, 0);
+            border-right: 3px solid rgb(0, 151, 146);
+            margin: 5px auto;
+            width: 400px;
+        }
+        form button{
+            width: 440px;
+            cursor: pointer;
+        }
+        button:hover{
+            transition: all .5s;
+            box-shadow: inset 0px -10px 10px black;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h2>The total members who subscribes me: <%= count %></h2>
+    <form action="/user">
+        <button>view all users</button>
+    </form>
+    <br>
+
+    <form action="/add-user" method="POST">
+  <!-- <input type="number" name="id" placeholder="Enter ID" required> -->
+  <input type="text" name="username" placeholder="Enter Username" required>
+  <input type="email" name="email" placeholder="Enter Email" required>
+  <input type="password" name="password" placeholder="Enter Password" required>
+  <button type="submit">join us today!</button>
+</form>
+</body>
+</html>
