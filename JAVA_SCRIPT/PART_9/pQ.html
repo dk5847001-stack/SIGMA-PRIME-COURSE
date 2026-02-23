@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .red{
+            color: red;
+        }
+        .underline{
+            text-decoration: underline;
+        }
+        .blue{
+            color: blue;
+        }
+        .bg-pink{
+            background-color: pink;
+        }
+        .border-black{
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        let body = document.querySelector('body');
+        let para1 = document.createElement('p');
+        para1.innerText = "Hey! I am red.";
+        para1.classList.add('red');
+        para1.classList.add('underline');
+        body.prepend(para1);
+        let h3 = document.createElement('h3');
+        h3.innerText = "I am a blue h3!";
+        h3.classList.add('blue');
+        body.prepend(h3);
+        let div = document.createElement('div');
+        div.innerText = "Hello I am a div!";
+        div.classList.add('bg-pink');
+        div.classList.add('border-black');
+        let h1 = document.createElement('h1');
+        h1.innerText = "I'm in a div";
+        let para2 = document.createElement('p');
+        para2.innerText = "ME TOO!";
+        div.prepend(h1);
+        div.prepend(para2);
+        body.prepend(div);
+        </script>
+</body>
+</html>

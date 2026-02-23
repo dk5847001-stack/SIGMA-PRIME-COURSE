@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #button{
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <script>
+let body = document.querySelector('body');
+let input = document.createElement('input');
+input.type = 'text';        
+input.placeholder = 'Enter your name...';
+body.append(input);
+let btn = document.createElement('button');
+btn.innerHTML = "click me";
+body.append(btn);
+btn.classList.add("button");
+btn.setAttribute("id", "button");
+let button = document.querySelector("#button");
+button.classList.add("black");
+    </script>
+</body>
+</html>

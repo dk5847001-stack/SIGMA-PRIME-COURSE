@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Find Err By Dilkhush Razz!</h1>
+
+    <script>
+        let h1 = document.querySelector("h1");
+        function colorChange(color, delay) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    let randomNumber = Math.floor(Math.random() * 10) + 1;
+                    if (randomNumber < 6) {
+                        reject("Promise rejected!");
+                    }
+                    h1.style.color = color;
+                    console.log(`color change to ${color}`);
+                    resolve("Promise resolve!");
+                }, delay);
+            })
+        }
+        async function getColor() {
+            try {
+                await colorChange("red", 1000);
+                await colorChange("green", 1000);
+                await colorChange("purple", 1000);
+                await colorChange("cyan", 1000);
+                await colorChange("orange", 1000);
+            }
+            catch(err){
+                console.log(err);
+                console.log('err caught');
+            }
+            let a = [1, 2, 3, 4, 6, 5];
+            for (arr of a) {
+                 console.log(arr);
+            }
+        }
+        getColor();
+    </script>
+</body>
+
+</html>

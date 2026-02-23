@@ -1,0 +1,22 @@
+const studentInfo = {
+    Dilkhush: {
+        Grade: "o",
+        City: "Madhepura"
+    },
+    Roshan: {
+        Grade: "A++",
+        City: "Bhagalpur"
+    },
+    Amar: {
+        Grade: "B--",
+        City: "Punjab"
+    }
+}
+console.log(studentInfo);
+console.log('Access the student...');
+console.log(studentInfo.Dilkhush);
+console.log(studentInfo.Dilkhush.City = "Delhi");
+console.log('');
+console.log(studentInfo);
+
+

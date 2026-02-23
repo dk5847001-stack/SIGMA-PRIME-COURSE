@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>Click me!</button>
+    <button>Click me!</button>
+    <button>Click me!</button>
+    <button>Click me!</button>
+    <button>Click me!</button>
+
+    <script>
+        let btns = document.querySelectorAll("button");
+        for(btn of btns){
+            btn.addEventListener("click", clickme);
+            btn.addEventListener("click", clickme2);
+            btn.addEventListener("mouseenter", mouseEnter);
+        }
+        function clickme(){
+            alert("Button was clicked!");
+        }
+        function clickme2(){
+            alert("Button was clicked again!");
+        }
+        function mouseEnter(){
+            alert("Mouse entered button area");
+        }
+    </script>
+</body>
+</html>

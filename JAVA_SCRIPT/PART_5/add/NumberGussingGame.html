@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const max = prompt(" Enter the max number");
+
+        const random = Math.floor(Math.random() * max) + 1;
+
+        let guess = prompt("Guess the number");
+
+        while (true) {
+            if (guess == "quit") {
+                alert("user quit");
+                break;
+            }
+            else if (guess == random) {
+                alert("Congrats! you guessed")
+                break;
+            }
+            else if(guess < random){
+                alert("Please guess large number")
+                guess = prompt(" your guess was wrong. please try again")
+            }
+            else if(guess > random){
+                alert("Please guess low number")
+                guess = prompt(" your guess was wrong. please try again")
+            }
+            
+        }
+    </script>
+</body>
+
+</html>

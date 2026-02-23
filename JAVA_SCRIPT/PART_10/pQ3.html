@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        h2{
+            color: #333;
+        }
+        input{
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            width: 300px;
+        }
+
+    </style>
+</head>
+<body>
+    <h2></h2>
+    <input type="text" name="username" id="name" placeholder="Enter your name">
+
+    <script>
+        let username = document.querySelector("#name");
+        let heading = document.querySelector("h2");
+        username.addEventListener("input", function(event){
+            if(event.target.value == ""){
+                heading.textContent = "Empty...";
+                return;
+            }else if(!/^[a-zA-Z ]/.test(event.target.value)){
+                heading.textContent = "Only characters are allowed";
+                heading.style.color = "red";
+                return;
+            }
+            else if(!isNaN(event.target.value)){
+                heading.textContent = "Numbers are not allowed";
+                heading.style.color = "red";
+                return;
+            }else if(event.target.value.length < 3){
+                heading.textContent = "Name must be at least 3 characters long";
+                heading.style.color = "red";
+                return;
+            } else if(event.target.value.length > 20){
+                heading.textContent = "Name is too long";
+                heading.style.color = "red";
+                return;
+            } else if(/[^a-zA-Z ]/.test(event.target.value)){
+                heading.textContent = "Special characters are not allowed";
+                heading.style.color = "red";
+                return;
+            }
+            else{
+                heading.textContent = event.target.value;
+                heading.style.color = "green";
+            }
+        })
+    </script>
+</body>
+</html>

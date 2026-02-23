@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+      const favoriteMovie = "avtar";
+      let guess = prompt("Guess my favorite movie?")
+      while((guess != favoriteMovie) && (guess != "quit")){
+        guess = prompt("Wrong guess! Please try again");
+      }
+      if(guess == favoriteMovie){
+        alert("Congratulation! your are guessed")
+      }
+      else{
+        alert("You are exit out of game!")
+      }
+    </script>
+</body>
+</html>

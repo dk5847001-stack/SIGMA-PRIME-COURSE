@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        input{
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            width: 300px;
+        }
+        button{
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+    <form action="/activity.html">
+        <input type="text" name="username" id="username" placeholder="Enter Username">
+        <br><br>
+        <input type="password" name="password" id="password" placeholder="Enter Password">
+        <br><br>
+        <button>Login</button>
+    </form>
+
+    <script>
+        let form = document.querySelector("form");
+        form.addEventListener("submit", function(event){
+            event.preventDefault();
+            let username = this.elements[0].value;
+            let password = this.elements[1].value;
+            // let username = document.querySelector("#username").value;
+            // let password = document.querySelector("#password").value;
+            alert(`Username: ${username}\nPassword: ${password}`);
+            console.log(`Username: ${username}\nPassword: ${password}`);
+            
+        })
+    </script>
+</body>
+</html>
