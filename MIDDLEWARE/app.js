@@ -40,8 +40,8 @@ app.get("/error", (req, res)=>{
 })
 // error handling middleware
 app.use((err, req, res, next)=>{
-  const {}
-    res.send(err);
+  let {status, message} = req.err;
+    res.status(status).send(message);
 })
 
 app.use("/random", checkToken, (req, res, next)=>{
