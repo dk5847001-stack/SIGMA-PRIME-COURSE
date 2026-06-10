@@ -1,0 +1,20 @@
+.NewProduct{
+    border: 1px solid gainsboro;
+    width: 240px;
+    height: 300px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgb(71, 71, 71);
+    background-color: rgba(31, 31, 31, 0.9);
+    border-style: dashed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+}
+.green{
+    background-color: rgb(58, 121, 35);
+    border-radius: 30px;
+    width: 100%;
+    box-shadow: 0 0px 10px rgb(2, 98, 57);
+}

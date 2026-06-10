@@ -38,9 +38,14 @@ app.get("/api", checkToken, (req, res)=>{
 app.get("/error", (req, res)=>{
     abc = abc;
 })
+
+app.get("/admin", (req, res)=>{
+    throw new ExpressError(403, "access to admin is forbidden")
+})
+
 // error handling middleware
 app.use((err, req, res, next)=>{
-  let {status, message} = req.err;
+  let {status = 500, message="SOME ERROR OCCUR!"} = err;
     res.status(status).send(message);
 })
 
