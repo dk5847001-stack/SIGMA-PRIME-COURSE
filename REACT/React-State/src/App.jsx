@@ -1,10 +1,10 @@
-
+import "./App.css"
+import Counter from "./Counter"
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      
+      <h1>Welcome</h1><br /><hr /><br />
+      <Counter/>
     </>
   )
 }
