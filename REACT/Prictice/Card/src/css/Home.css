@@ -1,0 +1,13 @@
+.Home{
+    margin-top: 10px;
+    text-align: center;
+}
+body{
+    background-color: rgba(33, 30, 30, 0.636);
+    width: 100%;
+    min-height: 100vh;
+}
+hr{
+    border-style: dotted;
+    color: #fff;
+}

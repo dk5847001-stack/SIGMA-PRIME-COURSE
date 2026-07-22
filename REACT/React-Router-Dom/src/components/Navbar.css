@@ -1,0 +1,32 @@
+.Navbar{
+    width: 100%;
+    min-height: 10vh;
+    background-color: rgba(0, 0, 255, 0.655);
+    color: antiquewhite;
+    font-weight: 900;
+    padding: 5px;
+}
+ul{
+    display: flex;
+    gap: 12rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+a{
+    padding: 10px 20px;
+    border: 1px solid rgba(128, 128, 128, 0.897);
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    margin: 4px;
+    background-color: rgba(20, 20, 92, 0.705);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+a:hover{
+    background-color: rgba(23, 23, 118, 0.881);
+    color: yellow;
+    transition: all .3s;
+}
