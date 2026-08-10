@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.Navbar{
+    width: 100%;
+    min-height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    background-color: aliceblue;
+}
+.Left{
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+ul>a{
+    padding: 10px 20px;
+    border: 1px solid black;
+    margin-left: 10px;
+    text-decoration: none;
+}
+h2{
+    margin-left: 10px;
+}
+.Right{
+    padding-right: 10px;
+}
