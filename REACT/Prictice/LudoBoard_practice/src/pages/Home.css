@@ -1,0 +1,14 @@
+h1{
+    margin: auto;
+    align-items: center;
+    text-align: center;
+    font-size: 4rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body{
+    background-color: aliceblue;
+}
+hr{
+font-size: 2rem;
+border-style: dotted;
+}

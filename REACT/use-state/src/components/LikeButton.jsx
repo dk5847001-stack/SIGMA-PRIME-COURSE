@@ -10,7 +10,7 @@ export default function LikeButton() {
             return currCount = 34; 
         });
         setCount((currCount)=>{
-            return currCount = 34; 
+            return currCount = 0; 
         });
         console.log("we are going to toggle!")
     };
