@@ -1,0 +1,15 @@
+body{
+  align-items: center;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: aliceblue;
+  background-color: #000000ad;
+}
+input{
+  padding: 10px 20px;
+  margin-right: 5px;
+}
+button{
+  padding: 10px 20px;
+  cursor: pointer;
+}
