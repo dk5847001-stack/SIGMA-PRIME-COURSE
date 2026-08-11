@@ -23,12 +23,13 @@ button{
     padding: 10px 20px;
 }
 .mainFooter{
-    background-color: rgb(155, 155, 155);
+    background-color:rgba(0, 14, 27, 0.815);
     padding: 10px;
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
+    color: rgb(187, 180, 180);
 }
 .allright{
     align-items: center;
