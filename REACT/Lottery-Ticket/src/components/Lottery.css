@@ -1,6 +1,73 @@
-.Lottery > h2{
+.Lottery>h2 {
     text-align: center;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 2rem;
-    text-decoration:wavy;
+    text-decoration: wavy;
+}
+
+.btn>button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    border: none;
+    box-shadow: inset 5px 5px 30px 5px rgb(34, 34, 34);
+    color: rgb(241, 205, 0);
+    font-weight: bold;
+    width: 200px;
+    cursor: pointer;
+}
+
+.btn>button:hover {
+    transition: all .3s;
+    border: 2px solid white;
+    color: #fff;
+    box-shadow: inset 5px 5px 30px 5px rgb(92, 92, 92);
+}
+
+.Lottery>.btn {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.box {
+    align-items: center;
+    text-align: center;
+    width: 30%;
+    border: none;
+    height: 200px;
+    margin: auto;
+    box-shadow: inset 5px 5px 30px 5px rgb(92, 92, 92);
+    border-radius: 8px;
+    padding-top: 30px;
+}
+
+button {
+    padding: 10px 28px;
+    margin-top: 5px;
+    box-shadow: inset 5px 5px 30px 5px rgb(169, 203, 205);
+    border: none;
+    cursor: pointer;
+    color: #330000;
+    font-weight: bold;
+    border-radius: 3px;
+}
+button:hover{
+    box-shadow: inset 5px 5px 30px 5px rgb(139, 170, 172);
+    border: 1px solid black;
+}
+h4{
+    color: #063800;
+    font-size: 1.2rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+p{
+    font-size: .9rem;
+    margin-top: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(2, 40, 116);
+    margin-bottom: 70px;
+}
+span{
+    color: rgb(190, 4, 4);
 }
