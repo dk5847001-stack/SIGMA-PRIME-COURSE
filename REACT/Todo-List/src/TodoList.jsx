@@ -7,7 +7,7 @@ export default function TodoList(){
 
     let addNewTask = ()=>{
         setTodo((prevTodo)=>{
-            return [...Todo, {task: newTodo, id: uuidv4()}]
+            return [...Todo, {task: newTodo, isDone: false, id: uuidv4()}]
         })
         setNewTodo("")
     }
@@ -38,13 +38,13 @@ export default function TodoList(){
             return prevTodo.map((todo)=>{
                 if(id == todo.id){
                     return{
-                        ...prevTodo,
+                        ...todo,
                         task: todo.task.toUpperCase()
                     }
                 }
                 else{
                     return {
-                        ...prevTodo,
+                        ...todo,
                         task: todo.task
                     }
                 }
@@ -53,10 +53,31 @@ export default function TodoList(){
         console.log("upper case one")
     }
 
+    let markAsDone = (id)=>{
+        setTodo((prevTodo)=>{
+            return prevTodo.map((todo)=>{
+                if(todo.id==id){
+                    return{
+                        ...todo,
+                        isDone: true
+                    }
+                }else{
+                    return{
+                        ...todo
+                    }
+                }
+            })
+        })
+        console.log("clicke mark as done!")
+    }
+
+
     return(
         <>
+        <form onSubmit={addNewTask}>
         <input type="text" placeholder="Enter here your Task" value={newTodo} onChange={updateTodoValue} />
-        <button onClick={addNewTask}>Add Task</button><hr /><br />
+        <button type="submit">Add Task</button><hr /><br />
+        </form>
 
         <div className="task">
             <h2>Task Todo</h2>
@@ -64,9 +85,10 @@ export default function TodoList(){
             <ul>
                 {
                     Todo.map((todo)=>{
-                        return (<li key={todo.id}><span>{todo.task} &nbsp; 
+                        return (<li style={{backgroundColor: todo.isDone ? "red" : "transparent", textDecoration: todo.isDone? "line-through" : "none", marginBottom: "5px"}} key={todo.id}><span>{todo.task} &nbsp; 
                         <button style={{marginRight: "5px", marginBottom: "5px"}} onClick={()=> deleteTodo(todo.id)}>Delete</button>
-                        <button onClick={()=> upperCaseOne(todo.id)}>upperCase one</button>
+                        <button style={{marginRight: "5px", marginBottom: "5px"}} onClick={()=> upperCaseOne(todo.id)}>upperCase one</button>
+                        <button style={{marginRight: "5px", marginBottom: "5px", backgroundColor: "green", color: "#fff", fontWeight: "bold"}} onClick={()=> markAsDone(todo.id)}>Done</button>
                         </span></li>)
                     })
                 }
