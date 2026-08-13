@@ -1,0 +1,19 @@
+.Navbar{
+    min-height: 10vh;
+    background-color: aliceblue;
+    align-items: center;
+    text-align: center;
+    padding-top: 40px;
+}
+ul > a{
+    align-items: center;
+    text-align: center;
+    margin-right: 40px;
+    margin-top: 40px;
+    font-style: none;
+    text-decoration: none;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
