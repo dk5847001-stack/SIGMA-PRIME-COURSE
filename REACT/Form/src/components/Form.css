@@ -1,0 +1,398 @@
+input{
+    padding: 10px 20px;
+    margin-right: 10px;
+    width: 400px;
+}
+button{
+    padding: 10px 20px;
+}
+.section{
+    display: flex;
+    justify-content: space-around;
+    padding: 30px;
+}
+.left{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    text-align: start;
+    align-items: start;
+    width: 40%;
+}
+.right{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 40%;
+}
+body{
+    width: 100%;
+    min-height: 100vh;
+}
+/* ================================
+   PREMIUM FORM PREVIEW CARD
+================================ */
+
+.right.form-preview-card {
+    width: 100%;
+    max-width: 520px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.95),
+            rgba(248, 250, 252, 0.92)
+        );
+
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 24px;
+
+    box-shadow:
+        0 25px 60px rgba(15, 23, 42, 0.12),
+        0 8px 25px rgba(99, 102, 241, 0.08);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+/* Decorative glow */
+
+.right.form-preview-card::before {
+    content: "";
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    top: -90px;
+    right: -70px;
+
+    background: rgba(99, 102, 241, 0.18);
+
+    border-radius: 50%;
+
+    filter: blur(40px);
+
+    pointer-events: none;
+}
+
+.right.form-preview-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 140px;
+    height: 140px;
+
+    bottom: -80px;
+    left: -60px;
+
+    background: rgba(14, 165, 233, 0.12);
+
+    border-radius: 50%;
+
+    filter: blur(40px);
+
+    pointer-events: none;
+}
+
+
+/* ================================
+   HEADER
+================================ */
+
+.preview-header {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    margin-bottom: 28px;
+}
+
+.preview-header h2 {
+    margin: 8px 0 5px;
+
+    font-size: 26px;
+    font-weight: 800;
+
+    letter-spacing: -0.6px;
+
+    color: #0f172a;
+}
+
+.preview-header p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+
+/* ================================
+   BADGE
+================================ */
+
+.preview-badge {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 6px 10px;
+
+    border-radius: 999px;
+
+    background: rgba(99, 102, 241, 0.1);
+
+    color: #4f46e5;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+/* ================================
+   HEADER ICON
+================================ */
+
+.preview-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: linear-gradient(
+        135deg,
+        #6366f1,
+        #8b5cf6
+    );
+
+    color: white;
+
+    font-size: 21px;
+
+    box-shadow:
+        0 10px 25px rgba(99, 102, 241, 0.3);
+
+    transform: rotate(-4deg);
+
+    transition: 0.3s ease;
+}
+
+.form-preview-card:hover .preview-icon {
+    transform: rotate(0deg) scale(1.05);
+}
+
+
+/* ================================
+   FIELDS
+================================ */
+
+.preview-fields {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+.preview-field {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.preview-field label {
+    font-size: 13px;
+
+    font-weight: 700;
+
+    color: #334155;
+
+    margin-left: 3px;
+}
+
+
+/* ================================
+   INPUT CONTAINER
+================================ */
+
+.preview-input {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    min-height: 54px;
+
+    padding: 0 15px;
+
+    background: rgba(255, 255, 255, 0.85);
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 14px;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+.preview-input:hover {
+    border-color: #c7d2fe;
+
+    box-shadow:
+        0 8px 20px rgba(99, 102, 241, 0.08);
+
+    transform: translateY(-1px);
+}
+
+
+/* ================================
+   ICON
+================================ */
+
+.field-icon {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-right: 10px;
+
+    border-radius: 9px;
+
+    background: #f1f5f9;
+
+    font-size: 14px;
+}
+
+
+/* ================================
+   INPUT
+================================ */
+
+.preview-input input {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #0f172a;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    padding: 0;
+}
+
+.preview-input input::placeholder {
+    color: #94a3b8;
+}
+
+
+/* ================================
+   FOOTER
+================================ */
+
+.preview-footer {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 24px;
+    padding-top: 18px;
+
+    border-top: 1px solid #e2e8f0;
+
+    color: #64748b;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* ================================
+   STATUS DOT
+================================ */
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #22c55e;
+
+    box-shadow:
+        0 0 0 4px rgba(34, 197, 94, 0.12);
+
+    animation: pulseStatus 2s infinite;
+}
+
+@keyframes pulseStatus {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 0 4px rgba(34, 197, 94, 0.12);
+    }
+
+    50% {
+        box-shadow:
+            0 0 0 7px rgba(34, 197, 94, 0.04);
+    }
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 600px) {
+
+    .right.form-preview-card {
+        padding: 22px;
+
+        border-radius: 20px;
+    }
+
+    .preview-header h2 {
+        font-size: 22px;
+    }
+
+    .preview-icon {
+        width: 42px;
+        height: 42px;
+    }
+
+    .preview-input {
+        min-height: 50px;
+    }
+}
