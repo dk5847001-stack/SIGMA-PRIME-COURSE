@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color:rgb(221, 240, 255);
+    min-height: 100vh;
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+h2{
+    width: 210px;
+    margin: auto;
+}
+input{
+    padding: 10px 20px;
+    width: 300px;
+}
+.formInput{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding: 20px;
+}
+button{
+    padding: 10px 30px;
+    margin-left: 20px;
+}
+.section{
+    padding: 10px;
+    background-color: rgba(150, 153, 197, 0.789);
+    display: flex;
+    justify-content: space-around;
+}
+.right{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+}

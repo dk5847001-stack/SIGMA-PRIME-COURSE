@@ -1,116 +1,26 @@
-import { useState } from "react"
-import "./Form.css"
-export default function Form() {
-    let [formData, setFormData] = useState(
-        {
-            fullName: "",
-            email: "",
-            password: ""
-        }
-    )
+import { useState } from "react";
+import { Alert, Button, Form as BootstrapForm } from "react-bootstrap";
+import PersonalInformation from "./application/PersonalInformation";
+import EducationDetails from "./application/EducationDetails";
+import Skills from "./application/Skills";
+import Projects from "./application/Projects";
+import Certifications from "./application/Certifications";
+import WorkExperience from "./application/WorkExperience";
+import SocialLinks from "./application/SocialLinks";
+import "./Form.css";
 
-    let inputHandler = (event) => {
-        let fildName = event.target.name;
-        let newValue = event.target.value;
+const id = () => crypto.randomUUID();
+const initialState = () => ({ personal:{fullName:"",email:"",phone:"",location:""}, education:[{id:id(),institution:"",degree:"",field:"",year:"",score:""}], skills:[{id:id(),name:"",level:""}], projects:[{id:id(),title:"",link:"",description:""}], certifications:[{id:id(),name:"",issuer:"",date:"",link:""}], experience:[{id:id(),company:"",role:"",startDate:"",endDate:"",description:""}], social:{github:"",linkedin:"",portfolio:""} });
+const empty = { education:{institution:"",degree:"",field:"",year:"",score:""}, skills:{name:"",level:""}, projects:{title:"",link:"",description:""}, certifications:{name:"",issuer:"",date:"",link:""}, experience:{company:"",role:"",startDate:"",endDate:"",description:""} };
+const isUrl = value => !value || /^https?:\/\/.+/i.test(value);
 
-        setFormData((currData) => {
-            return {
-                ...currData, [fildName]: newValue
-            }
-        })
-    };
-
-    let handleFormSubmit = (event) => {
-        console.log(formData);
-        event.preventDefault();
-        setFormData({
-            fullName: "",
-            email: "",
-            password: ""
-        })
-    }
-
-    return (
-        <div className="Form">
-            <h1>Form</h1><br />
-            <div className="section">
-                <div className="left">
-                    <h2>Form Data</h2><br />
-                    <form onSubmit={handleFormSubmit}>
-                        <label htmlFor="username">Name </label><br />
-                        <input type="text" placeholder="Enter your name here..." value={formData.fullName} onChange={inputHandler} id="username" name="fullName" /><br /><br />
-
-                        <label htmlFor="useremail">Email </label><br />
-                        <input type="email" placeholder="Enter email address..." value={formData.email} onChange={inputHandler} id="useremail" name="email" /><br /><br />
-
-                        <label htmlFor="password">Password </label><br />
-                        <input type="password" placeholder="Enter email address..." value={formData.password} onChange={inputHandler} id="password" name="password" /><br /><br />
-                        <button>Submit</button>
-                    </form>
-                </div>
-                {/* ---------------------------- */}
-                <div className="right form-preview-card">
-    <div className="preview-header">
-        <div>
-            <span className="preview-badge">LIVE PREVIEW</span>
-            <h2>Form Value</h2>
-            <p>Currently entered information</p>
-        </div>
-
-        <div className="preview-icon">
-            ✨
-        </div>
-    </div>
-
-    <div className="preview-fields">
-
-        <div className="preview-field">
-            <label>Full Name</label>
-            <div className="preview-input">
-                <span className="field-icon">👤</span>
-                <input
-                    type="text"
-                    value={formData.fullName}
-                    name="fullName"
-                    readOnly
-                />
-            </div>
-        </div>
-
-        <div className="preview-field">
-            <label>Email Address</label>
-            <div className="preview-input">
-                <span className="field-icon">✉️</span>
-                <input
-                    type="email"
-                    value={formData.email}
-                    name="email"
-                    readOnly
-                />
-            </div>
-        </div>
-
-        <div className="preview-field">
-            <label>Password</label>
-            <div className="preview-input">
-                <span className="field-icon">🔐</span>
-                <input
-                    type="password"
-                    value={formData.password}
-                    name="password"
-                    readOnly
-                />
-            </div>
-        </div>
-
-    </div>
-
-    <div className="preview-footer">
-        <span className="status-dot"></span>
-        <span>Form data synchronized</span>
-    </div>
-</div>
-            </div>
-        </div>
-    )
+/** Application state and validation are intentionally centralized for predictable dynamic updates. */
+export default function ApplicationForm() {
+ const [data,setData]=useState(initialState); const [errors,setErrors]=useState({}); const [submitted,setSubmitted]=useState(false);
+ const setPersonal=e=>{const {name,value}=e.target;setData(d=>({...d,personal:{...d.personal,[name]:value}}));}; const setSocial=e=>{const {name,value}=e.target;setData(d=>({...d,social:{...d.social,[name]:value}}));};
+ const changeItem=(section,itemId,field,value)=>setData(d=>({...d,[section]:d[section].map(item=>item.id===itemId?{...item,[field]:value}:item)}));
+ const addItem=section=>setData(d=>({...d,[section]:[...d[section],{id:id(),...empty[section]}]})); const removeItem=(section,itemId)=>setData(d=>({...d,[section]:d[section].filter(item=>item.id!==itemId)}));
+ const validate=()=>{const e={personal:{},education:[],skills:[],projects:[],certifications:[],experience:[],social:{}}; const req=(o,key,label)=>{if(!o[key].trim())o[key]=`${label} is required.`}; req(e.personal,"fullName","Full name"); if(!data.personal.email.trim())e.personal.email="Email is required.";else if(!/^\S+@\S+\.\S+$/.test(data.personal.email))e.personal.email="Enter a valid email address."; req(e.personal,"phone","Phone number"); req(e.personal,"location","Location"); data.education.forEach(x=>{const z={};["institution","degree","field","year"].forEach(k=>{if(!x[k].trim())z[k]=`${k==="field"?"Field of study":k[0].toUpperCase()+k.slice(1)} is required.`});e.education.push(z)}); data.skills.forEach(x=>{const z={};if(!x.name.trim())z.name="Skill is required.";if(!x.level)z.level="Select a proficiency level.";e.skills.push(z)}); data.projects.forEach(x=>{const z={};if(!x.title.trim())z.title="Project title is required.";if(!x.description.trim())z.description="Project description is required.";if(!isUrl(x.link))z.link="Enter a valid URL.";e.projects.push(z)}); data.certifications.forEach(x=>{const z={};if(!x.name.trim())z.name="Certification name is required.";if(!x.issuer.trim())z.issuer="Issuer is required.";if(!isUrl(x.link))z.link="Enter a valid URL.";e.certifications.push(z)}); data.experience.forEach(x=>{const z={};["company","role","description"].forEach(k=>{if(!x[k].trim())z[k]=`${k[0].toUpperCase()+k.slice(1)} is required.`});e.experience.push(z)}); Object.keys(data.social).forEach(k=>{if(!isUrl(data.social[k]))e.social[k]="Enter a valid URL."}); const has=Object.values(e.personal).length||e.education.some(Object.keys)||e.skills.some(Object.keys)||e.projects.some(Object.keys)||e.certifications.some(Object.keys)||e.experience.some(Object.keys)||Object.values(e.social).length; return {e,has};};
+ const submit=e=>{e.preventDefault();setSubmitted(false);const result=validate();setErrors(result.e);if(result.has){document.querySelector(".is-invalid")?.scrollIntoView({behavior:"smooth",block:"center"});return;}setSubmitted(true);};
+ return <BootstrapForm noValidate onSubmit={submit} className="application-form">{submitted&&<Alert variant="success" className="success-message">Application ready to submit — all details look good.</Alert>}<PersonalInformation data={data.personal} errors={errors.personal||{}} onChange={setPersonal}/><EducationDetails items={data.education} errors={errors.education||[]} onChange={(...a)=>changeItem("education",...a)} onAdd={()=>addItem("education")} onRemove={id=>removeItem("education",id)}/><Skills items={data.skills} errors={errors.skills||[]} onChange={(...a)=>changeItem("skills",...a)} onAdd={()=>addItem("skills")} onRemove={id=>removeItem("skills",id)}/><Projects items={data.projects} errors={errors.projects||[]} onChange={(...a)=>changeItem("projects",...a)} onAdd={()=>addItem("projects")} onRemove={id=>removeItem("projects",id)}/><Certifications items={data.certifications} errors={errors.certifications||[]} onChange={(...a)=>changeItem("certifications",...a)} onAdd={()=>addItem("certifications")} onRemove={id=>removeItem("certifications",id)}/><WorkExperience items={data.experience} errors={errors.experience||[]} onChange={(...a)=>changeItem("experience",...a)} onAdd={()=>addItem("experience")} onRemove={id=>removeItem("experience",id)}/><SocialLinks data={data.social} errors={errors.social||{}} onChange={setSocial}/><div className="submit-row"><p>Fields marked with * are required.</p><Button type="submit" className="submit-button">Submit application <span>→</span></Button></div></BootstrapForm>;
 }

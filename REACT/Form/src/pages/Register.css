@@ -1,4 +1,10 @@
-.Register{
-    align-items: center;
-    text-align: center;
-}
+.application-page { min-height: 100vh; padding: 64px 20px; background: #080d20; color: #f7f8ff; position: relative; overflow: hidden; }
+.application-page::before, .application-page::after { content:""; position:absolute; border-radius:50%; filter:blur(8px); pointer-events:none; }
+.application-page::before { width:520px; height:520px; background:rgba(111,88,255,.26); top:-180px; left:-170px; }
+.application-page::after { width:460px; height:460px; background:rgba(0,202,255,.15); right:-160px; bottom:8%; }
+.application-shell { max-width: 1080px; margin: 0 auto; position: relative; z-index: 1; }
+.application-hero { max-width: 720px; margin: 0 auto 30px; text-align: center; }
+.eyebrow { display:inline-block; padding:6px 11px; border:1px solid rgba(178,193,255,.35); border-radius:99px; color:#c9d3ff; font-size:.69rem; font-weight:700; letter-spacing:.14em; }
+.application-hero h1 { margin: 13px 0 10px; color:#fff; font-size:clamp(2.15rem, 6vw, 3.6rem); font-weight:750; letter-spacing:-.055em; }
+.application-hero p { max-width:610px; margin:auto; color:#b8c0dc; font-size:1rem; line-height:1.65; }
+.progress-copy { display:flex; justify-content:space-between; margin:25px auto 0; max-width:380px; color:#dbe1ff; font-size:.78rem; font-weight:600; }
