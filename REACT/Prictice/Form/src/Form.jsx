@@ -52,9 +52,9 @@ export default function Form() {
                 </div>
                 {/* --------------- */}
                 <div className="right">
-                    <input type="text" value={formData.name} onChange={handleInputData} />
-                    <input type="text" value={formData.email} onChange={handleInputData} />
-                    <input type="text" value={formData.password} onChange={handleInputData} />
+                    <input type="text" value={formData.name} onChange={handleInputData} disabled/>
+                    <input type="text" value={formData.email} onChange={handleInputData} disabled />
+                    <input type="text" value={formData.password} onChange={handleInputData} disabled />
                 </div>
             </div>
         </>

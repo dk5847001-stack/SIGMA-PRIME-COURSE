@@ -1,0 +1,36 @@
+form{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+textarea{
+    width: 320px;
+    height: 80px;
+    padding: 10px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.section2{
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    flex-direction: row;
+    padding: 10px 0 50px 150px;
+    background-color:rgba(242, 236, 255, 0.589);
+}
+h3{
+    width: 125px;
+    margin: auto;
+}
+.remarks{
+    min-width: 200px;
+    /* border: 1px solid rgb(132, 132, 132); */
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    color: gray;
+    box-shadow: inset 2px 3px 20px rgb(129, 129, 129);
+}
