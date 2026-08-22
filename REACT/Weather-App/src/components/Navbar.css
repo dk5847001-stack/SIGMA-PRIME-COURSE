@@ -1,0 +1,553 @@
+/* =========================================
+   PREMIUM WEATHER NAVBAR
+========================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.Navbar {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+
+    width: 100%;
+
+    background: rgba(8, 15, 35, 0.82);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.18);
+
+    transition: all 0.3s ease;
+}
+
+.Navbar-container {
+    width: min(1400px, 94%);
+    min-height: 76px;
+
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    position: relative;
+}
+
+/* =========================================
+   BRAND
+========================================= */
+
+.Navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    text-decoration: none;
+
+    color: #ffffff;
+
+    transition: transform 0.3s ease;
+}
+
+.Navbar-brand:hover {
+    transform: translateY(-2px);
+}
+
+.Brand-icon {
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    font-size: 23px;
+
+    background: linear-gradient(
+        135deg,
+        #38bdf8,
+        #6366f1
+    );
+
+    box-shadow:
+        0 8px 25px rgba(56, 189, 248, 0.28);
+}
+
+.Brand-text {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    font-size: 21px;
+    letter-spacing: -0.5px;
+}
+
+.Brand-text span {
+    font-weight: 500;
+    color: #f8fafc;
+}
+
+.Brand-text strong {
+    font-weight: 800;
+
+    background: linear-gradient(
+        90deg,
+        #38bdf8,
+        #818cf8
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* =========================================
+   NAV MENU
+========================================= */
+
+.Nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+/* =========================================
+   NAV LINKS
+========================================= */
+
+.Nav-links {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.Nav-links a {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 10px 13px;
+
+    color: #cbd5e1;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    border-radius: 10px;
+
+    transition:
+        color 0.25s ease,
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+.Nav-links a span {
+    font-size: 14px;
+
+    opacity: 0.8;
+
+    transition: transform 0.25s ease;
+}
+
+.Nav-links a:hover {
+    color: #ffffff;
+
+    background: rgba(255, 255, 255, 0.07);
+
+    transform: translateY(-1px);
+}
+
+.Nav-links a:hover span {
+    transform: scale(1.15);
+}
+
+/* Active link */
+
+.Nav-links a.nav-active {
+    color: #ffffff;
+
+    background: linear-gradient(
+        135deg,
+        rgba(56, 189, 248, 0.14),
+        rgba(99, 102, 241, 0.14)
+    );
+}
+
+.Nav-links a.nav-active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 13px;
+    right: 13px;
+    bottom: 4px;
+
+    height: 2px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        90deg,
+        #38bdf8,
+        #818cf8
+    );
+}
+
+/* =========================================
+   AUTH BUTTONS
+========================================= */
+
+.Nav-auth {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.Login-btn,
+.Signup-btn {
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: all 0.3s ease;
+}
+
+/* Login */
+
+.Login-btn {
+    color: #e2e8f0;
+
+    padding: 10px 15px;
+
+    border-radius: 10px;
+}
+
+.Login-btn:hover {
+    color: #ffffff;
+
+    background: rgba(255, 255, 255, 0.07);
+}
+
+/* Signup */
+
+.Signup-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 10px 17px;
+
+    color: #ffffff;
+
+    border-radius: 11px;
+
+    background: linear-gradient(
+        135deg,
+        #0ea5e9,
+        #6366f1
+    );
+
+    box-shadow:
+        0 8px 22px rgba(59, 130, 246, 0.25);
+}
+
+.Signup-btn span {
+    font-size: 17px;
+
+    transition: transform 0.3s ease;
+}
+
+.Signup-btn:hover {
+    color: #ffffff;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 28px rgba(59, 130, 246, 0.38);
+}
+
+.Signup-btn:hover span {
+    transform: translateX(4px);
+}
+
+/* =========================================
+   HAMBURGER
+========================================= */
+
+.Hamburger {
+    display: none;
+
+    width: 44px;
+    height: 44px;
+
+    padding: 9px;
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    border-radius: 11px;
+
+    background: rgba(255, 255, 255, 0.05);
+
+    cursor: pointer;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    transition: all 0.3s ease;
+}
+
+.Hamburger:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.Hamburger span {
+    width: 21px;
+    height: 2px;
+
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    transition: all 0.3s ease;
+}
+
+/* Hamburger animation */
+
+.Hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.Hamburger.open span:nth-child(2) {
+    opacity: 0;
+    transform: scale(0);
+}
+
+.Hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1050px) {
+
+    .Nav-menu {
+        gap: 12px;
+    }
+
+    .Nav-links {
+        gap: 0;
+    }
+
+    .Nav-links a {
+        padding: 9px 9px;
+        font-size: 13px;
+    }
+
+    .Nav-links a span {
+        display: none;
+    }
+
+    .Brand-text {
+        font-size: 19px;
+    }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 800px) {
+
+    .Navbar-container {
+        min-height: 70px;
+    }
+
+    .Hamburger {
+        display: flex;
+    }
+
+    .Nav-menu {
+        position: absolute;
+
+        top: calc(100% + 10px);
+        left: 0;
+        right: 0;
+
+        padding: 15px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 15px;
+
+        border: 1px solid rgba(255, 255, 255, 0.08);
+
+        border-radius: 17px;
+
+        background: rgba(8, 15, 35, 0.96);
+
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+
+        box-shadow:
+            0 20px 50px rgba(0, 0, 0, 0.35);
+
+        opacity: 0;
+        visibility: hidden;
+
+        transform: translateY(-12px) scale(0.98);
+
+        transition:
+            opacity 0.3s ease,
+            visibility 0.3s ease,
+            transform 0.3s ease;
+    }
+
+    .Nav-menu.active {
+        opacity: 1;
+        visibility: visible;
+
+        transform: translateY(0) scale(1);
+    }
+
+    .Nav-links {
+        display: flex;
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 4px;
+
+        width: 100%;
+    }
+
+    .Nav-links a {
+        width: 100%;
+
+        padding: 13px 15px;
+
+        font-size: 15px;
+
+        border-radius: 11px;
+    }
+
+    .Nav-links a span {
+        display: inline-block;
+
+        width: 22px;
+
+        text-align: center;
+    }
+
+    .Nav-links a.nav-active::after {
+        left: auto;
+        right: 12px;
+
+        top: 50%;
+        bottom: auto;
+
+        width: 4px;
+        height: 20px;
+
+        transform: translateY(-50%);
+    }
+
+    .Nav-auth {
+        width: 100%;
+
+        padding-top: 13px;
+
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 9px;
+    }
+
+    .Login-btn,
+    .Signup-btn {
+        justify-content: center;
+
+        text-align: center;
+
+        padding: 12px;
+    }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+    .Navbar-container {
+        width: 92%;
+    }
+
+    .Brand-icon {
+        width: 39px;
+        height: 39px;
+
+        font-size: 20px;
+    }
+
+    .Brand-text {
+        font-size: 18px;
+    }
+
+    .Hamburger {
+        width: 42px;
+        height: 42px;
+    }
+
+    .Nav-menu {
+        top: calc(100% + 8px);
+    }
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+.Nav-links a:focus-visible,
+.Login-btn:focus-visible,
+.Signup-btn:focus-visible,
+.Hamburger:focus-visible {
+    outline: 2px solid #38bdf8;
+    outline-offset: 3px;
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
