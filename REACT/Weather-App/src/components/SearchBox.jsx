@@ -1,123 +1,363 @@
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import SearchIcon from '@mui/icons-material/Search';
-
+import { useState } from "react";
+import SearchIcon from "@mui/icons-material/Search";
+import CloseIcon from "@mui/icons-material/Close";
 import "./SearchBox.css";
-import { useState } from 'react';
 
-export default function SearchBox() {
+export default function SearchBox({ updateInfo }) {
 
-    let [input, setInput] = useState({
-        value: "",
-        isFilled: false,
-        isClick: false
-    });
+    const [input, setInput] = useState("");
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
-    let [saveInput, setSaveInput] = useState("");
-    let [info, setInfo] = useState({});
+    const API_URL =
+        "https://api.openweathermap.org/data/2.5/weather";
 
-    const API_URL = "https://api.openweathermap.org/data/2.5/weather";
-    const API_KEY = "738e561665f566cf8f90d5ab30958c0e";
+    const API_KEY =
+        "738e561665f566cf8f90d5ab30958c0e";
+
+
+    // =========================================
+    // FETCH WEATHER DATA
+    // =========================================
 
     const getWeatherInfo = async (city) => {
-        let response = await fetch(`${API_URL}?q=${city}&appid=${API_KEY}&units=matric`);
-        let jsonResponse = await response.json();
-        console.log(jsonResponse);
-        let result = {
-            name: jsonResponse.name,
-            feels_like: jsonResponse.main.feels_like,
-            grnd_level: jsonResponse.main.grnd_level,
-            humidity: jsonResponse.main.humidity,
-            pressure: jsonResponse.main.pressure,
-            sea_level: jsonResponse.main.sea_level,
-            temp: jsonResponse.main.temp,
-            temp_max: jsonResponse.main.temp_max,
-            temp_min: jsonResponse.main.temp_min,
-            country: jsonResponse.sys.country,
-            sunrise: jsonResponse.sys.sunrise,
-            sunset: jsonResponse.sys.sunset,
-            weather: jsonResponse.weather[0].description
+
+        try {
+
+            setLoading(true);
+            setError("");
+
+            const response = await fetch(
+                `${API_URL}?q=${encodeURIComponent(
+                    city
+                )}&appid=${API_KEY}&units=metric`
+            );
+
+            const jsonResponse = await response.json();
+
+            console.log("Weather API Response:", jsonResponse);
+
+
+            if (!response.ok) {
+
+                if (response.status === 404) {
+                    throw new Error("CITY_NOT_FOUND");
+                }
+
+                if (response.status === 401) {
+                    throw new Error("INVALID_API_KEY");
+                }
+
+                throw new Error(
+                    jsonResponse.message ||
+                    "Unable to fetch weather information."
+                );
+            }
+
+
+            const result = {
+
+                name: jsonResponse.name,
+
+                feels_like:
+                    jsonResponse.main?.feels_like ?? 0,
+
+                grnd_level:
+                    jsonResponse.main?.grnd_level ?? 0,
+
+                humidity:
+                    jsonResponse.main?.humidity ?? 0,
+
+                pressure:
+                    jsonResponse.main?.pressure ?? 0,
+
+                sea_level:
+                    jsonResponse.main?.sea_level ?? 0,
+
+                temp:
+                    jsonResponse.main?.temp ?? 0,
+
+                temp_max:
+                    jsonResponse.main?.temp_max ?? 0,
+
+                temp_min:
+                    jsonResponse.main?.temp_min ?? 0,
+
+                country:
+                    jsonResponse.sys?.country ?? "--",
+
+                sunrise:
+                    jsonResponse.sys?.sunrise ?? 0,
+
+                sunset:
+                    jsonResponse.sys?.sunset ?? 0,
+
+                weather:
+                    jsonResponse.weather?.[0]?.description ??
+                    "Unknown"
+
+            };
+
+
+            // Send data to Weather.jsx
+            updateInfo(result);
+
         }
-        setInfo(result)
-        console.log(result)
+
+        catch (err) {
+
+            console.error("Weather Error:", err);
+
+            if (err.message === "CITY_NOT_FOUND") {
+
+                setError(
+                    "City not found. Please check the spelling and try again."
+                );
+
+            }
+
+            else if (err.message === "INVALID_API_KEY") {
+
+                setError(
+                    "Weather service configuration error."
+                );
+
+            }
+
+            else {
+
+                setError(
+                    "Unable to fetch weather information. Please try again."
+                );
+            }
+
+        }
+
+        finally {
+
+            setLoading(false);
+
+        }
     };
 
-    let handleInput = (event) => {
-        let currVal = event.target.value;
 
-        setInput({
-            value: currVal,
-            isFilled: currVal.trim() !== "",
-            isClick: false
-        });
+    // =========================================
+    // INPUT HANDLER
+    // =========================================
+
+    const handleInput = (event) => {
+
+        setInput(event.target.value);
+
+        if (error) {
+            setError("");
+        }
     };
 
-    let handleButtonClick = (event) => {
+
+    // =========================================
+    // SEARCH
+    // =========================================
+
+    const handleSubmit = async (event) => {
 
         event.preventDefault();
 
-        console.log(input.value);
-        console.log(input.isFilled);
+        const city = input.trim();
 
-        let city = input.value;
+        if (!city) {
 
-        setSaveInput(city);
+            setError(
+                "Please enter a city name."
+            );
 
-        getWeatherInfo(city);
+            return;
+        }
 
-        setInput({
-            value: "",
-            isFilled: false,
-            isClick: true
-        });
+        if (loading) {
+            return;
+        }
+
+        await getWeatherInfo(city);
+
     };
 
+
+    // =========================================
+    // CLEAR INPUT
+    // =========================================
+
+    const clearInput = () => {
+
+        setInput("");
+        setError("");
+
+    };
+
+
     return (
+
         <div className="SearchBox">
 
-            <form onSubmit={handleButtonClick}>
+            <form
+                className="SearchBox-form"
+                onSubmit={handleSubmit}
+            >
 
-                <TextField
-                    error={!input.isFilled}
-                    id="city"
-                    label="City Name"
-                    required
-                    value={input.value}
-                    variant="outlined"
-                    onChange={handleInput}
-                    helperText={!input.isFilled && "Enter city name"}
-                />
+                {/* =================================
+                    SEARCH INPUT
+                ================================== */}
 
-                <Button
-                    id="btn"
-                    type="submit"
-                    variant="outlined"
-                    endIcon={<SearchIcon />}
-                    size="large"
+                <div
+                    className={`SearchBox-input-wrapper ${
+                        error
+                            ? "SearchBox-input-error"
+                            : ""
+                    }`}
                 >
-                    Search
-                </Button>
 
-                <br />
+                    <div className="SearchBox-search-icon">
+                        <SearchIcon />
+                    </div>
 
-                <p>
-                    {input.isClick && (
-                        <>
-                            I am searching for <b>{saveInput}</b><br />
-                            <ul>
-                                <li>Country : {info.country}</li>
-                                <li>City : {info.name}</li>
-                                <li>Temprature : {info.temp}</li>
-                                <li>Pressure : {info.pressure}</li>
-                                <li>Max Temprature : {info.temp_max}</li>
-                                <li>Min Temprature : {info.temp_min}</li>
-                                <li>Description : {info.weather}</li>
-                            </ul>
-                        </>
+
+                    <div className="SearchBox-input-content">
+
+                        <label htmlFor="city">
+                            Search Location
+                        </label>
+
+                        <input
+                            id="city"
+                            type="text"
+                            value={input}
+                            onChange={handleInput}
+                            placeholder="Enter city name..."
+                            autoComplete="off"
+                            disabled={loading}
+                            aria-invalid={Boolean(error)}
+                        />
+
+                    </div>
+
+
+                    {/* Clear Button */}
+
+                    {input && !loading && (
+
+                        <button
+                            type="button"
+                            className="SearchBox-clear"
+                            onClick={clearInput}
+                            aria-label="Clear search"
+                        >
+                            <CloseIcon />
+                        </button>
+
                     )}
-                </p>
+
+                </div>
+
+
+                {/* =================================
+                    SEARCH BUTTON
+                ================================== */}
+
+                <button
+                    type="submit"
+                    className={`SearchBox-button ${
+                        loading
+                            ? "SearchBox-button-loading"
+                            : ""
+                    }`}
+                    disabled={loading}
+                >
+
+                    {loading ? (
+
+                        <>
+                            <span className="SearchBox-spinner"></span>
+
+                            <span>
+                                Searching...
+                            </span>
+                        </>
+
+                    ) : (
+
+                        <>
+
+                            <span>
+                                Search Weather
+                            </span>
+
+                            <SearchIcon />
+
+                        </>
+
+                    )}
+
+                </button>
 
             </form>
+
+
+            {/* =================================
+                ERROR MESSAGE
+            ================================== */}
+
+            {error && (
+
+                <div
+                    className="SearchBox-error"
+                    role="alert"
+                >
+
+                    <span className="SearchBox-error-icon">
+                        !
+                    </span>
+
+                    <span>
+                        {error}
+                    </span>
+
+                    <button
+                        type="button"
+                        onClick={() => setError("")}
+                        aria-label="Dismiss error"
+                    >
+                        <CloseIcon />
+                    </button>
+
+                </div>
+
+            )}
+
+
+            {/* =================================
+                SEARCH HINT
+            ================================== */}
+
+            {!error && (
+
+                <div className="SearchBox-hint">
+
+                    <span>
+                        ✦
+                    </span>
+
+                    <p>
+                        Enter a city name to discover
+                        current weather conditions.
+                    </p>
+
+                    <kbd>
+                        Enter ↵
+                    </kbd>
+
+                </div>
+
+            )}
 
         </div>
     );

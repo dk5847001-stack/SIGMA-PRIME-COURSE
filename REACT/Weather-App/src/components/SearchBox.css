@@ -1,4 +1,566 @@
-#btn{
-    padding: 14px;
-    margin-left: 3px;
+/* =========================================
+   PREMIUM SEARCH BOX
+========================================= */
+
+.SearchBox {
+    width: 100%;
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+.SearchBox-form {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: 1fr auto;
+
+    align-items: stretch;
+
+    gap: 10px;
+}
+
+
+/* =========================================
+   INPUT WRAPPER
+========================================= */
+
+.SearchBox-input-wrapper {
+    position: relative;
+
+    min-height: 62px;
+
+    display: flex;
+
+    align-items: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.045),
+            rgba(255, 255, 255, 0.018)
+        );
+
+    transition:
+        border-color 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.SearchBox-input-wrapper:hover {
+    border-color: rgba(56, 189, 248, 0.16);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(56, 189, 248, 0.045),
+            rgba(255, 255, 255, 0.018)
+        );
+}
+
+.SearchBox-input-wrapper:focus-within {
+    border-color: rgba(56, 189, 248, 0.35);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(56, 189, 248, 0.055),
+            rgba(99, 102, 241, 0.025)
+        );
+
+    box-shadow:
+        0 0 0 3px rgba(56, 189, 248, 0.045),
+        0 10px 35px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================================
+   SEARCH ICON
+========================================= */
+
+.SearchBox-search-icon {
+    width: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #38bdf8;
+}
+
+.SearchBox-search-icon svg {
+    width: 21px;
+    height: 21px;
+}
+
+
+/* =========================================
+   INPUT CONTENT
+========================================= */
+
+.SearchBox-input-content {
+    flex: 1;
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.SearchBox-input-content label {
+    color: #64748b;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.1px;
+
+    text-transform: uppercase;
+}
+
+.SearchBox-input-content input {
+    width: 100%;
+
+    padding: 0;
+
+    border: 0;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #e2e8f0;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 500;
+}
+
+.SearchBox-input-content input::placeholder {
+    color: #475569;
+
+    font-weight: 400;
+}
+
+.SearchBox-input-content input:disabled {
+    cursor: not-allowed;
+
+    opacity: 0.6;
+}
+
+
+/* =========================================
+   CLEAR BUTTON
+========================================= */
+
+.SearchBox-clear {
+    width: 34px;
+    height: 34px;
+
+    margin-right: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 0;
+
+    border-radius: 9px;
+
+    color: #64748b;
+
+    background: rgba(255, 255, 255, 0.035);
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.SearchBox-clear:hover {
+    color: #e2e8f0;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    transform: rotate(90deg);
+}
+
+.SearchBox-clear svg {
+    width: 16px;
+    height: 16px;
+}
+
+
+/* =========================================
+   ERROR INPUT
+========================================= */
+
+.SearchBox-input-error {
+    border-color: rgba(248, 113, 113, 0.35);
+
+    box-shadow:
+        0 0 0 3px rgba(248, 113, 113, 0.035);
+}
+
+.SearchBox-input-error:focus-within {
+    border-color: rgba(248, 113, 113, 0.5);
+
+    box-shadow:
+        0 0 0 3px rgba(248, 113, 113, 0.05);
+}
+
+
+/* =========================================
+   SEARCH BUTTON
+========================================= */
+
+.SearchBox-button {
+    min-width: 165px;
+
+    padding: 0 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    color: #ffffff;
+
+    border: 0;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0ea5e9,
+            #6366f1
+        );
+
+    box-shadow:
+        0 10px 30px rgba(59, 130, 246, 0.15);
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+}
+
+.SearchBox-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+
+    filter: brightness(1.08);
+
+    box-shadow:
+        0 15px 38px rgba(59, 130, 246, 0.27);
+}
+
+.SearchBox-button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.SearchBox-button:disabled {
+    cursor: not-allowed;
+
+    opacity: 0.7;
+}
+
+.SearchBox-button svg {
+    width: 17px;
+    height: 17px;
+}
+
+
+/* =========================================
+   LOADING STATE
+========================================= */
+
+.SearchBox-button-loading {
+    background:
+        linear-gradient(
+            135deg,
+            #0284c7,
+            #4f46e5
+        );
+}
+
+.SearchBox-spinner {
+    width: 14px;
+    height: 14px;
+
+    border: 2px solid rgba(255, 255, 255, 0.25);
+
+    border-top-color: #ffffff;
+
+    border-radius: 50%;
+
+    animation:
+        SearchBox-spin 0.7s linear infinite;
+}
+
+@keyframes SearchBox-spin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================================
+   ERROR MESSAGE
+========================================= */
+
+.SearchBox-error {
+    margin-top: 10px;
+
+    padding: 10px 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    border: 1px solid rgba(248, 113, 113, 0.12);
+
+    border-radius: 10px;
+
+    background: rgba(248, 113, 113, 0.045);
+
+    color: #fca5a5;
+
+    font-size: 9px;
+
+    line-height: 1.5;
+}
+
+.SearchBox-error-icon {
+    width: 18px;
+    height: 18px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(248, 113, 113, 0.12);
+
+    color: #f87171;
+
+    font-size: 9px;
+
+    font-weight: 800;
+}
+
+.SearchBox-error > span:nth-child(2) {
+    flex: 1;
+}
+
+.SearchBox-error button {
+    width: 25px;
+    height: 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 0;
+
+    border-radius: 6px;
+
+    color: #94a3b8;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease;
+}
+
+.SearchBox-error button:hover {
+    color: #f8fafc;
+
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.SearchBox-error button svg {
+    width: 14px;
+    height: 14px;
+}
+
+
+/* =========================================
+   HINT
+========================================= */
+
+.SearchBox-hint {
+    margin-top: 9px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    color: #475569;
+
+    font-size: 8px;
+}
+
+.SearchBox-hint > span {
+    color: #38bdf8;
+
+    font-size: 9px;
+}
+
+.SearchBox-hint p {
+    margin: 0;
+
+    flex: 1;
+}
+
+.SearchBox-hint kbd {
+    padding: 4px 7px;
+
+    color: #64748b;
+
+    border: 1px solid rgba(255, 255, 255, 0.06);
+
+    border-radius: 5px;
+
+    background: rgba(255, 255, 255, 0.025);
+
+    font-family: inherit;
+
+    font-size: 7px;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 700px) {
+
+    .SearchBox-form {
+        grid-template-columns: 1fr;
+    }
+
+    .SearchBox-button {
+        min-height: 48px;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 500px) {
+
+    .SearchBox-input-wrapper {
+        min-height: 58px;
+
+        border-radius: 12px;
+    }
+
+    .SearchBox-search-icon {
+        width: 43px;
+    }
+
+    .SearchBox-input-content label {
+        font-size: 6px;
+    }
+
+    .SearchBox-input-content input {
+        font-size: 12px;
+    }
+
+    .SearchBox-button {
+        border-radius: 12px;
+
+        font-size: 10px;
+    }
+
+    .SearchBox-hint kbd {
+        display: none;
+    }
+
+}
+
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+.SearchBox button:focus-visible,
+.SearchBox input:focus-visible {
+    outline: 2px solid #38bdf8;
+
+    outline-offset: 2px;
+}
+
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .SearchBox *,
+    .SearchBox *::before,
+    .SearchBox *::after {
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+    }
 }
