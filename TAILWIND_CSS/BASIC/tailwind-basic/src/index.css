@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+.box {
+    @apply flex items-center justify-center
+        text-blue-300
+        p-4
+        h-64
+        rounded-md
+        w-full
+        sm:w-[calc(50%_-_4px)]
+        md:w-[calc(25%_-_6px)]
+        text-center
+        bg-slate-700
+        outline
+        outline-offset-4;
+}
