@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function Form() {
+export default function Form({setUsers}) {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -15,7 +15,7 @@ export default function Form() {
     }
 
     let HandleSubmitForm = async (event) =>{
-        // event.preventDefault();
+        event.preventDefault();
         try{
             const response = await fetch("http://localhost:3000/api/users", {
                 method: "POST",
@@ -27,6 +27,15 @@ export default function Form() {
             });
             const data = await response.json();
             console.log(data);
+            setUsers((previousUsers)=>[
+                data.user,
+                ...previousUsers
+            ]);
+            setFormData({
+                name: "",
+                email: "",
+                age: ""
+            });
         }catch(err){
             console.log("Error", err)
         }

@@ -43,16 +43,77 @@ app.post("/api/users", async (req, res) => {
     }
 });
 
-app.get("/api/users", async (req, res)=>{
-    try{
-    const users = await User.find();
-    res.status(201).json(users)
-    }catch(err){
+app.get("/api/users", async (req, res) => {
+    try {
+        const users = await User.find().sort({ createdAt: -1 });
+        res.status(201).json(users)
+    } catch (err) {
         res.status(500).json({
             message: "something went wrong!",
             error: err.message
         })
-    }    
+    }
+});
+
+app.get("/api/users/:id", async (req, res)=>{
+try{
+    const {id} = req.params;
+    const user = await User.findById(id);
+    res.status(200).json({
+        message: "user find successfully!",
+        user: user
+    })
+}catch(err){
+    res.status(500).json({
+        message: "something went wrong!",
+        error: err.message
+    })
+}
+});
+
+app.put("/api/users/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const updateUser = await User.findByIdAndUpdate(
+            id,
+            req.body,
+            { new: true }
+        );
+
+        if (!updateUser) {
+            return res.status(404).json({
+                message: "User not found!"
+            });
+        }
+
+        res.status(200).json({
+            message: "User updated successfully!",
+            user: updateUser
+        });
+
+    } catch (err) {
+        res.status(500).json({
+            message: "Something went wrong!",
+            error: err.message
+        });
+    }
+});
+
+app.delete("/api/users/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deleteUser = await User.findByIdAndDelete(id);
+        res.status(200).json({
+            message: "user deleted successfully!",
+            user: deleteUser
+        });
+    } catch (err) {
+        res.status(500).json({
+            message: "something went wrong!",
+            error: err.message
+        })
+    }
 })
 
 app.listen(PORT, () => {
