@@ -86,6 +86,11 @@ app.get("/api/subscribers", async (req, res) => {
     try {
         let allSubscribers = await Subscriber.find();
         console.log(allSubscribers);
+        res.status(200).json({
+            success: true,
+            message: "subscriber fetch successfully!",
+            subscriber: allSubscribers
+        })
     } catch (err) {
         res.status(500).json({
             message: "something went wrong!",

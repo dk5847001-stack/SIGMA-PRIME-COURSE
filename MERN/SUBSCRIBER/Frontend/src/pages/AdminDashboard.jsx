@@ -1,4 +1,31 @@
+import { useState, useEffect } from "react"
+
 export default function AdminDashboard() {
+  const [subscriber, setSubscriber] = useState([]);
+
+
+ useEffect(() => {
+  const fetchSubscriber = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/api/subscribers");
+
+      console.log("STATUS:", response.status);
+      console.log("OK:", response.ok);
+
+      const data = await response.json();
+
+      console.log("FRONTEND DATA:", data);
+      console.log("IS ARRAY:", Array.isArray(data));
+
+      setSubscriber(data.subscriber);
+    } catch (err) {
+      console.log("ERROR:", err);
+    }
+  };
+
+  fetchSubscriber();
+}, []);
+
   return (
     <section className="relative isolate overflow-hidden bg-gray-900 px-6 py-24 sm:py-32 lg:px-8">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,var(--color-indigo-500),transparent)] opacity-10" />
@@ -43,12 +70,22 @@ export default function AdminDashboard() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td className="border border-gray-300 p-2">dk@gmail.com</td>
-            <td className="border border-gray-300 p-2">Active</td>
-            <td className="border border-gray-300 p-2">Delete  ||  Edit</td>
-          </tr>
-        </tbody>
+            {subscriber.map((sub) => (
+              <tr key={sub._id}>
+                <td className="border border-gray-300 p-2">
+                  {sub.email}
+                </td>
+
+                <td className="border border-gray-300 p-2">
+                  <span className="bg-[oklch(72.3%_0.219_149.579)] rounded-full py-1 px-4">Active</span>
+                </td>
+
+                <td className="border border-gray-300 p-2">
+                 <span className="bg-[oklch(72.3%_0.219_149.579)] rounded-full py-1 px-4">Delete</span> || <span className="bg-[oklch(72.3%_0.219_149.579)] rounded-full py-1 px-4">Edit</span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
       </table>
     </section>
   )
