@@ -30,8 +30,26 @@ export default function AdminDashboard() {
               <div className="text-gray-400">CEO of Workcation</div>
             </div>
           </figcaption>
-        </figure>
+        </figure><br />
+        <h2 className="text-center text-white text-4xl font-bold">ALL SUBSCRIBERS</h2>
       </div>
+      <br />
+      <table className="text-white w-full text-center border-separate border border-gray-400">
+        <thead>
+          <tr>
+            <th className="border border-gray-300 p-2">Email</th>
+            <th className="border border-gray-300 p-2">Status</th>
+            <th className="border border-gray-300 p-2">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className="border border-gray-300 p-2">dk@gmail.com</td>
+            <td className="border border-gray-300 p-2">Active</td>
+            <td className="border border-gray-300 p-2">Delete  ||  Edit</td>
+          </tr>
+        </tbody>
+      </table>
     </section>
   )
 }

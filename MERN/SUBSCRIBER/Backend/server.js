@@ -42,8 +42,8 @@ app.post("/api/subscribers", async (req, res) => {
         }
 
         // check axistence subscriber
-        const existingSubscriber = await Subscriber.findOne({email});
-        if(existingSubscriber){
+        const existingSubscriber = await Subscriber.findOne({ email });
+        if (existingSubscriber) {
             console.log("This email is already subscribed!");
             return res.status(409).json({
                 success: false,
@@ -80,6 +80,19 @@ app.post("/api/subscribers", async (req, res) => {
     }
 
 });
+
+// get Route for subscribers.
+app.get("/api/subscribers", async (req, res) => {
+    try {
+        let allSubscribers = await Subscriber.find();
+        console.log(allSubscribers);
+    } catch (err) {
+        res.status(500).json({
+            message: "something went wrong!",
+            error: err.message
+        })
+    }
+})
 
 app.listen(PORT, () => {
     console.log(`🥱🥱The app is listening on PORT : https://localhost:${PORT}`);
