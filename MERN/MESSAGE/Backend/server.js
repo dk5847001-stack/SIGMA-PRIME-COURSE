@@ -55,7 +55,45 @@ app.post("/api/messages", async (req, res) => {
             error: err.message
         });
     }
+})
+
+app.get("/api/messages", async (req, res) => {
+    try {
+        let allMessage = await Message.find();
+
+        if (!allMessage) {
+            return res.status(404).json({
+                message: "Message not found",
+            })
+        }
+        res.status(200).json({
+            message: "Message fetch successfully!",
+            message: allMessage
+        });
+    } catch (err) {
+        res.status(500).json({
+            message: "something went wrong!",
+            error: err.message
+        })
+    }
 });
+
+app.delete("/api/messages/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deleteMessage = await Message.findByIdAndDelete(id);
+        res.status(200).json({
+            success: true,
+            message: "Message deleted successfully",
+        });
+        console.log(deleteMessage)
+    } catch (err) {
+        res.status(500).json({
+            message: "something went wrong!",
+            error: err.message
+        })
+    }
+})
 
 app.listen(PORT, () => {
     console.log(`📩📩 The app is listening on PORT ${PORT} ✓`);
