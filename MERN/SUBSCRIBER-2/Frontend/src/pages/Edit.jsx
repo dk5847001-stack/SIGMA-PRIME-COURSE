@@ -40,6 +40,7 @@ export default function Edit() {
                     }
                 )
                 const data = await response.json();
+                
                 console.log(data.message);
                 navigate("/admin")
             }catch(err){
