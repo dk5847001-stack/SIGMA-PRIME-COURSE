@@ -78,6 +78,29 @@ app.get("/api/messages", async (req, res) => {
     }
 });
 
+app.get("/api/messages/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const singleMessage = await Message.findById(id);
+        console.log(singleMessage);
+        if (!singleMessage) {
+            return res.status(404).json({
+                message: "message not found!",
+            })
+        }
+        res.status(200).json({
+            message: "user find successfully!",
+            message: singleMessage
+        })
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: "something went wrong!",
+            error: err.message
+        })
+    }
+})
+
 app.delete("/api/messages/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -93,7 +116,7 @@ app.delete("/api/messages/:id", async (req, res) => {
             error: err.message
         })
     }
-})
+});
 
 app.listen(PORT, () => {
     console.log(`📩📩 The app is listening on PORT ${PORT} ✓`);

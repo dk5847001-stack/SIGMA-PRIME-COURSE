@@ -48,6 +48,10 @@ export default function Admin() {
         }
     };
 
+    const handleMessageEdit = async (id) => {
+        
+    }
+
     return (
         <div className="w-full p-2 sm:p-4">
 
@@ -81,7 +85,10 @@ export default function Admin() {
                             </th>
 
                             <th className="p-3 bg-gray-800 border border-gray-600">
-                                Action
+                                Delete
+                            </th>
+                            <th className="p-3 bg-gray-800 border border-gray-600">
+                                Edit
                             </th>
                         </tr>
                     </thead>
@@ -116,6 +123,16 @@ export default function Admin() {
                                             className="px-3 py-1.5 rounded-md bg-red-600 hover:bg-red-700 active:bg-red-800 transition cursor-pointer text-white"
                                         >
                                             Delete
+                                        </button>
+                                    </td>
+                                    <td className="p-3 bg-slate-700 border border-gray-600">
+                                        <button
+                                            onClick={() =>
+                                                handleMessageEdit(msg._id)
+                                            }
+                                            className="px-3 py-1.5 rounded-md bg-blue-600 hover:bg-blue-700 active:bg-red-800 transition cursor-pointer text-white"
+                                        >
+                                            Edit
                                         </button>
                                     </td>
 
