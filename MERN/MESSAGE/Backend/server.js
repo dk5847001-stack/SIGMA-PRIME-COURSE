@@ -99,6 +99,29 @@ app.get("/api/messages/:id", async (req, res) => {
             error: err.message
         })
     }
+});
+
+app.put("/api/messages/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { name, email, subject, message } = req.body;
+        const updateMessage = await Message.findByIdAndUpdate(id, {
+            name,
+            email,
+            subject,
+            message
+        });
+        console.log(updateMessage);
+        res.status(200).json({
+            message: "message updated successfully",
+            message: updateMessage
+        })
+    } catch (err) {
+        res.status(500).json({
+            message: "something went wrong!",
+            error: err.message
+        })
+    }
 })
 
 app.delete("/api/messages/:id", async (req, res) => {

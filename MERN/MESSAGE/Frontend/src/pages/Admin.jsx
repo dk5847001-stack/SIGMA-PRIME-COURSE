@@ -49,7 +49,7 @@ export default function Admin() {
     };
 
     const handleMessageEdit = async (id) => {
-        
+        navigate(`/edit/${id}`);
     }
 
     return (
