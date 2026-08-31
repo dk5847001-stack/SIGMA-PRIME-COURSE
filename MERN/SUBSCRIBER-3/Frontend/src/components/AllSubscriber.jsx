@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom";
 
 export default function AllSubscriber() {
+    const navigate = useNavigate();
     const [subscriber, setSubscriber] = useState([]);
 
     useEffect(() => {
@@ -32,6 +34,10 @@ export default function AllSubscriber() {
         }catch(err){
             console.log(err.message);
         }
+    };
+
+    let editSubscriber = (id)=>{
+        navigate(`/edit/${id}`)
     }
 
     return (
@@ -52,7 +58,7 @@ export default function AllSubscriber() {
                             return (
                                 <tr key={sub._id} className="border-2 text-purple-600">
                                     <td className="outline-1 p-2 bg-gray-800 text-yellow-100 hover:bg-slate-700">{sub.email}</td>
-                                    <td className="outline-1 p-2 bg-gray-800 text-yellow-100 hover:bg-slate-700">Edit</td>
+                                    <td onClick={()=> editSubscriber(sub._id)} className="outline-1 p-2 bg-gray-800 text-yellow-100 hover:bg-slate-700">Edit</td>
                                     <td onClick={()=> deleteSubscriber(sub._id)} className="outline-1 p-2 bg-gray-800 text-yellow-100 hover:bg-slate-700">Delete</td>
                                 </tr>
                             )
