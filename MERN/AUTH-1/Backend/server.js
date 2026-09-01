@@ -5,6 +5,7 @@ const connectDB = require("./config/dbConfig");
 const User = require("./models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const authMiddleware = require("./middleware/authMiddleware");
 const PORT = process.env.PORT;
 const app = express();
 
@@ -19,6 +20,13 @@ app.get("/", (req, res) => {
         message: "api is working"
     })
 });
+
+app.get("/protected", authMiddleware, (req, res)=>{
+    res.status(200).json({
+        success: true,
+        message: "Access protected route",
+    })
+})
 
 // --------------------- REGISTER ROUTE -------------------
 app.post("/signup", async (req, res) => {
