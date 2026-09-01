@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 export default function Login() {
     const navigate = useNavigate();
+    const [message, setMessage] = useState("");
+    const [loading, setLoading] = useState(false);
+
     const [formData, setFormData] = useState({
         email: "",
         password: ""
@@ -17,6 +20,8 @@ export default function Login() {
 
     let handleFormSubmit = async (event) => {
         event.preventDefault();
+        setMessage("");
+        setLoading(true);
 
         try {
             const response = await fetch("http://localhost:3000/login",
@@ -30,6 +35,7 @@ export default function Login() {
             );
             const data = await response.json();
             if (data.success) {
+                setMessage(data.message);
                 console.log(data);
                 setFormData({
                     email: "",
@@ -42,18 +48,25 @@ export default function Login() {
                 );
 
                 setTimeout(() => {
-                    navigate("/");
-                }, 500);
+                    navigate("/", { replace: true });
+                }, 1000);
+            }else{
+                setMessage(data.message);
+                setLoading(false);
             }
         } catch (err) {
             console.log(err.message)
+            setMessage("internal server error")
+        }
+        finally{
+            setLoading(false)
         }
     }
     return (
         <div className="min-h-screen flex flex-col items-center justify-center">
 
             <h2 className="text-center text-4xl font-bold mb-8">
-                Welcome to Signup Page
+                Welcome to Login Page
             </h2>
 
             <form
@@ -83,9 +96,16 @@ export default function Login() {
 
                 <button
                     type="submit"
+                    disabled={loading}
                     className="w-75 p-2 bg-blue-700 text-white rounded hover:bg-blue-800 cursor-pointer disabled:opacity-50"
-                > login
+                > 
+                {loading ? "Loging in..." : "Login"}
                 </button>
+                {message && (
+                    <p className={`text-center ${message.includes("success") ? "text-green-500" : "text-red-500"}`}>
+                        {message}
+                    </p>
+                )}
             </form>
 
         </div>

@@ -6,6 +6,7 @@ const User = require("./models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const authMiddleware = require("./middleware/authMiddleware");
+const adminMiddleware = require("./middleware/adminMiddleware");
 const PORT = process.env.PORT;
 const app = express();
 
@@ -26,7 +27,15 @@ app.get("/protected", authMiddleware, (req, res)=>{
         success: true,
         message: "Access protected route",
     })
-})
+});
+
+// admin route
+app.get("/admin", authMiddleware, adminMiddleware, (req, res)=>{
+    res.status(200).json({
+        success: true,
+        message: "Access admin route"
+    });
+});
 
 // --------------------- REGISTER ROUTE -------------------
 app.post("/signup", async (req, res) => {
