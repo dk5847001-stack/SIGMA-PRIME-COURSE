@@ -7,11 +7,16 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const authMiddleware = require("./middleware/authMiddleware");
 const adminMiddleware = require("./middleware/adminMiddleware");
+const loginRateLimit = require("./middleware/loginRateLimit");
+const signupRateLimit = require("./middleware/signupRateLimit");
+
 const PORT = process.env.PORT;
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use("/login", loginRateLimit);
+app.use("/signup", signupRateLimit);
 
 connectDB();
 
