@@ -50,10 +50,23 @@ app.post("/signup", async (req, res) => {
             email,
             password: hashedPassword
         });
+
+        // jwt token generate
+        const token = jwt.sign(
+            {
+                userId: savedUser._id,
+                role: savedUser.role
+            },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: "1d"
+            }
+        );
         console.log(savedUser);
         res.status(201).json({
-            status: true,
+            success: true,
             message: "user registered successfully!",
+            token,
             user: {
                 name: savedUser.name,
                 email: savedUser.email,
