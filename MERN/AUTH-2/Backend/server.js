@@ -5,6 +5,8 @@ const User = require("./models/User");
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const authMiddleware = require("./middleware/authMiddleware");
+const adminMiddleware = require("./middleware/adminMiddleware");
 const signupRateLimit = require("./middleware/signupRateLimit");
 const loginRateLimit = require("./middleware/loginRateLimit");
 const app = express();
@@ -16,9 +18,19 @@ app.use("/login", loginRateLimit);
 
 connectDB();
 
-app.get("/", (req, res) => {
+app.get("/", authMiddleware, (req, res) => {
     res.status(200).json({ message: "Welcome to the Authentication API" });
 });
+
+app.get("/admin",
+    authMiddleware,
+    adminMiddleware,
+    (req, res) => {
+        res.status(200).json({
+            success: true,
+            message: "access admin route"
+        })
+    })
 
 //------------------------------------------------- Register Route --------------------------------------------
 app.post("/signup", async (req, res) => {
@@ -101,7 +113,7 @@ app.post("/login", async (req, res) => {
         const { email, password } = req.body;
 
         // validation check
-        if(!email || !password){
+        if (!email || !password) {
             return res.status(401).json({
                 message: "Please provide both email and password!",
             })
@@ -114,7 +126,7 @@ app.post("/login", async (req, res) => {
         const user = await User.findOne({
             email: normalizedEmail
         });
-        if(!user){
+        if (!user) {
             return res.status(401).json({
                 message: "This email is not registered! Please sign up first.",
             })
@@ -126,7 +138,7 @@ app.post("/login", async (req, res) => {
             user.password
         );
 
-        if(!isPasswordCorrect){
+        if (!isPasswordCorrect) {
             return res.status(401).json({
                 message: "Invalid password! Please try again.",
             })
