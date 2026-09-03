@@ -1,6 +1,6 @@
-
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { Lock, Mail, KeyRound, CheckCircle2, AlertTriangle, X, Loader2 } from "lucide-react";
 
 export default function Login() {
     const navigate = useNavigate();
@@ -119,35 +119,43 @@ export default function Login() {
     };
 
     return (
-        <div className="min-h-screen text-black bg-slate-100 flex items-center justify-center px-4">
+        <div className="relative min-h-screen bg-slate-950 overflow-hidden flex items-center justify-center px-4">
 
-            <div className="w-full max-w-md">
+            {/* Ambient background */}
+            <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[130px]" />
+            <div className="absolute bottom-0 right-0 w-[420px] h-[420px] bg-violet-600/10 rounded-full blur-[120px]" />
+
+            <div className="relative w-full max-w-md">
 
                 {/* Alert */}
                 {message && (
                     <div
-                        className={`mb-5 flex items-start gap-3 rounded-xl border px-4 py-3 shadow-lg animate-[slideDown_0.3s_ease-out]
+                        className={`mb-5 flex items-start gap-3 rounded-xl border backdrop-blur-sm px-4 py-3 shadow-lg animate-[slideDown_0.3s_ease-out]
                         ${
                             messageType === "success"
-                                ? "bg-green-50 border-green-200 text-green-700"
-                                : "bg-red-50 border-red-200 text-red-700"
+                                ? "bg-emerald-500/10 border-emerald-400/30 text-emerald-300"
+                                : "bg-red-500/10 border-red-400/30 text-red-300"
                         }`}
                     >
 
                         {/* Icon */}
-                        <div className="text-xl">
-                            {messageType === "success" ? "✅" : "⚠️"}
+                        <div className="mt-0.5">
+                            {messageType === "success" ? (
+                                <CheckCircle2 size={18} strokeWidth={2} />
+                            ) : (
+                                <AlertTriangle size={18} strokeWidth={2} />
+                            )}
                         </div>
 
                         {/* Message */}
                         <div className="flex-1">
-                            <p className="font-semibold">
+                            <p className="font-semibold text-sm">
                                 {messageType === "success"
                                     ? "Success"
                                     : "Login Required"}
                             </p>
 
-                            <p className="text-sm mt-0.5">
+                            <p className="text-sm mt-0.5 opacity-90">
                                 {message}
                             </p>
                         </div>
@@ -156,23 +164,23 @@ export default function Login() {
                         <button
                             type="button"
                             onClick={() => setMessage("")}
-                            className="text-lg font-bold opacity-60 hover:opacity-100 cursor-pointer"
+                            className="opacity-60 hover:opacity-100 cursor-pointer transition-opacity duration-150"
                         >
-                            ×
+                            <X size={16} strokeWidth={2.5} />
                         </button>
                     </div>
                 )}
 
                 {/* Login Card */}
-                <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-7">
+                <div className="rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm shadow-[0_0_40px_-12px_rgba(34,211,238,0.15)] p-7">
 
-                    <div className="text-center mb-6">
-                        <div className="text-4xl mb-2">
-                            🔐
-                        </div>
+                    <div className="flex flex-col items-center text-center mb-6">
+                        <span className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-400/20 to-violet-600/20 border border-white/10 mb-3">
+                            <Lock size={24} strokeWidth={2} className="text-cyan-300" />
+                        </span>
 
-                        <h2 className="text-2xl font-bold text-slate-800">
-                            Welcome Back
+                        <h2 className="text-2xl font-bold text-white">
+                            Welcome back
                         </h2>
 
                         <p className="text-sm text-slate-500 mt-1">
@@ -186,48 +194,54 @@ export default function Login() {
                     >
 
                         {/* Email */}
-                        <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-1">
+                        <div className="flex flex-col gap-1.5">
+                            <label className="text-xs font-medium text-slate-400">
                                 Email Address
                             </label>
 
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder="Enter your email..."
-                                value={formData.email}
-                                onChange={handleInputChange}
-                                className="w-full border border-slate-300 rounded-lg px-3 py-2.5 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                            />
+                            <div className="flex items-center gap-2.5 rounded-lg border border-white/10 bg-slate-950/60 px-3.5 py-2.5 focus-within:border-cyan-400/40 transition-colors duration-150">
+                                <Mail size={16} strokeWidth={2} className="text-slate-500" />
+                                <input
+                                    type="email"
+                                    name="email"
+                                    placeholder="Enter your email..."
+                                    value={formData.email}
+                                    onChange={handleInputChange}
+                                    className="flex-1 bg-transparent text-sm text-slate-200 placeholder:text-slate-600 outline-none"
+                                />
+                            </div>
                         </div>
 
                         {/* Password */}
-                        <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-1">
+                        <div className="flex flex-col gap-1.5">
+                            <label className="text-xs font-medium text-slate-400">
                                 Password
                             </label>
 
-                            <input
-                                type="password"
-                                name="password"
-                                placeholder="Enter your password..."
-                                value={formData.password}
-                                onChange={handleInputChange}
-                                className="w-full border border-slate-300 rounded-lg px-3 py-2.5 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                            />
+                            <div className="flex items-center gap-2.5 rounded-lg border border-white/10 bg-slate-950/60 px-3.5 py-2.5 focus-within:border-cyan-400/40 transition-colors duration-150">
+                                <KeyRound size={16} strokeWidth={2} className="text-slate-500" />
+                                <input
+                                    type="password"
+                                    name="password"
+                                    placeholder="Enter your password..."
+                                    value={formData.password}
+                                    onChange={handleInputChange}
+                                    className="flex-1 bg-transparent text-sm text-slate-200 placeholder:text-slate-600 outline-none"
+                                />
+                            </div>
                         </div>
 
                         {/* Login Button */}
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-blue-600 text-white font-semibold py-2.5 rounded-lg hover:bg-blue-700 active:scale-[0.98] transition duration-200 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                            className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-400 to-violet-600 hover:brightness-110 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed text-slate-950 font-semibold py-2.5 rounded-lg shadow-[0_0_16px_-4px_rgba(34,211,238,0.5)] transition-[filter,transform] duration-150 mt-1"
                         >
                             {loading ? (
-                                <span className="flex items-center justify-center gap-2">
-                                    <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                                <>
+                                    <Loader2 size={16} strokeWidth={2.5} className="animate-spin" />
                                     Logging in...
-                                </span>
+                                </>
                             ) : (
                                 "Login"
                             )}

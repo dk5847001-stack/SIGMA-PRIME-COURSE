@@ -15,6 +15,8 @@ app.use(cors());
 app.use(express.json());
 app.use("/signup", signupRateLimit);
 app.use("/login", loginRateLimit);
+app.use("/admin", authMiddleware, adminMiddleware);
+
 
 connectDB();
 
@@ -23,14 +25,39 @@ app.get("/", authMiddleware, (req, res) => {
 });
 
 app.get("/admin",
-    authMiddleware,
-    adminMiddleware,
     (req, res) => {
         res.status(200).json({
             success: true,
             message: "access admin route"
         })
-    })
+    });
+
+app.get("/admin/users", async (req, res)=>{
+    try{
+        const users = await User.find();
+
+        // if user exists
+        if(!users){
+            return res.status(401).json({
+                success: false,
+                message: "User not found!"
+            })
+        };
+
+        // user fetch successfully
+        res.status(200).json({
+            success: true,
+            message: "user fetch successfylly!",
+            users
+        })
+    }catch(err){
+        res.status(500).json({
+            success: false,
+            message: "Something went wrong!",
+            error: err.message
+        })
+    }
+})
 
 //------------------------------------------------- Register Route --------------------------------------------
 app.post("/signup", async (req, res) => {
