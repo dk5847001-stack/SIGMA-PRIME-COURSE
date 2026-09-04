@@ -50,10 +50,14 @@ app.get("/get-cookie", (req, res)=>{
 
 // Delete cookie
 app.get("/delete-cookie", (req, res)=>{
-    res.clearCookie("accessTokenName");
+    res.clearCookie("accessTokenName", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax"
+    });
     res.json({
         success: true,
-        message: "cookie deleted successfully!"
+        message: "logout successful!"
     })
 });
 
