@@ -5,17 +5,25 @@ const User = require("./models/User");
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
 const authMiddleware = require("./middleware/authMiddleware");
 const adminMiddleware = require("./middleware/adminMiddleware");
 const signupRateLimit = require("./middleware/signupRateLimit");
 const loginRateLimit = require("./middleware/loginRateLimit");
 const app = express();
 
-app.use(cors());
+app.use(
+    cors({
+        origin: "http://localhost:5173",
+        credentials: true
+    })
+);
 app.use(express.json());
+app.use(cookieParser());
 app.use("/signup", signupRateLimit);
 app.use("/login", loginRateLimit);
 app.use("/admin", authMiddleware, adminMiddleware);
+app.use("/api", authMiddleware);
 
 
 connectDB();
@@ -32,12 +40,12 @@ app.get("/admin",
         })
     });
 
-app.get("/admin/users", async (req, res)=>{
-    try{
+app.get("/admin/users", async (req, res) => {
+    try {
         const users = await User.find();
 
         // if user exists
-        if(!users){
+        if (!users) {
             return res.status(401).json({
                 success: false,
                 message: "User not found!"
@@ -50,14 +58,14 @@ app.get("/admin/users", async (req, res)=>{
             message: "user fetch successfylly!",
             users
         })
-    }catch(err){
+    } catch (err) {
         res.status(500).json({
             success: false,
             message: "Something went wrong!",
             error: err.message
         })
     }
-})
+});
 
 //------------------------------------------------- Register Route --------------------------------------------
 app.post("/signup", async (req, res) => {
@@ -183,11 +191,17 @@ app.post("/login", async (req, res) => {
             }
         );
 
+        res.cookie("accessToken", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "lax",
+            maxAge: 24 * 60 * 60 * 1000
+        });
+
         // user login successful
         res.status(200).json({
             success: true,
             message: "User logged in successfully!",
-            token,
             user: {
                 name: user.name,
                 email: user.email,
@@ -201,7 +215,29 @@ app.post("/login", async (req, res) => {
             error: err.message
         })
     }
-})
+});
+
+app.get("/api/auth/me", async (req, res) => {
+    try {
+        const user = await User.findById(req.user.userId).select("-password");
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "user not found!"
+            })
+        };
+        res.status(200).json({
+            success: true,
+            user
+        })
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: "something went wrong!",
+            error: err.message
+        });
+    }
+});
 
 app.listen(process.env.PORT, () => {
     console.log(`🤖 Server is running on port ${process.env.PORT} ✓`);

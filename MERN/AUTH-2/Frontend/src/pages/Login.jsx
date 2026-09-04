@@ -69,6 +69,7 @@ export default function Login() {
                 headers: {
                     "Content-Type": "application/json"
                 },
+                 credentials: "include",
                 body: JSON.stringify(formData)
             });
 
@@ -77,7 +78,6 @@ export default function Login() {
             console.log(data);
 
             if (data.success) {
-                localStorage.setItem("token", data.token);
                 localStorage.setItem(
                     "user",
                     JSON.stringify(data.user)

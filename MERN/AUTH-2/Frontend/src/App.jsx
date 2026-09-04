@@ -8,6 +8,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Unauthorized from "./pages/Unauthorized";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Profile from "./components/Profile";
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
         <Route path="/register" element={<Register/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/unauthorized" element={<Unauthorized/>} />
+        <Route path="/me" element={<Profile/>} />
       </Routes>
     </div>
   )
