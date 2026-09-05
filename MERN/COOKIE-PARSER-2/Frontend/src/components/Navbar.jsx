@@ -1,10 +1,35 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-
+import { useEffect } from "react";
 function Navbar() {
 
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const checkAuth = async () => {
+            try {
+                const response = await fetch("http://localhost:3000/api/profile",
+                    {
+                        method: "GET",
+                        credentials: "include"
+                    }
+                );
+                const data = await response.json();
+                console.log(data);
+                if (response.ok && data.success) {
+                    setUser(data.user);
+                } else {
+                    setUser(null)
+                }
+            } catch (err) {
+                console.error("Authentication check faild:", err);
+                setUser(null);
+            }
+        };
+        checkAuth();
+    }, []);
 
     const handleLogout = async () => {
 
@@ -60,21 +85,22 @@ function Navbar() {
                         Admin
                     </Link>
 
-                    <Link to="/login">
-                        Login
-                    </Link>
+                    {
+                        user ?
+                         <>
+                         <span style={{color: "pink"}}>👋welcome {user.name}</span>
+                         <button
+                            onClick={handleLogout}
+                            disabled={loading}
+                            className="logout-btn"
+                        >
+                            {loading ? "Logging out..." : "Logout"}
+                        </button></>
+                        :
+                        <><Link to="/login">Login</Link><Link to="/signup">Signup</Link></>
+                    }
 
-                    <Link to="/signup">
-                        Signup
-                    </Link>
 
-                    <button
-                        onClick={handleLogout}
-                        disabled={loading}
-                        className="logout-btn"
-                    >
-                        {loading ? "Logging out..." : "Logout"}
-                    </button>
 
                 </div>
 
