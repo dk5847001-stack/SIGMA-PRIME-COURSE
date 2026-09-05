@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, useLocation } from "react-router-dom";
 function Login() {
 
     const navigate = useNavigate();
-
+    const location = useLocation()
+    const message = location.state?.message;
     const [formData, setFormData] = useState({
         email: "",
         password: ""
@@ -98,6 +98,12 @@ function Login() {
                     </p>
 
                 </div>
+
+                {message && (
+                    <p className="error-message">
+                       ❌ {message}
+                    </p>
+                )}
 
                 {error && (
                     <div className="error-message">

@@ -1,49 +1,102 @@
 import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
-export default function ProtectedRoute({requiredRole}){
+export default function ProtectedRoute({ requiredRole }) {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    useEffect(()=>{
-      const checkAuth = async () => {
-        try{
-            const response = await fetch("http://localhost:3000/api/profile",
-                {
-                    method: "GET",
-                    credentials: "include"
+    useEffect(() => {
+        const checkAuth = async () => {
+            try {
+                console.log("Checking authentication...");
+
+                const response = await fetch(
+                    "http://localhost:3000/api/profile",
+                    {
+                        method: "GET",
+                        credentials: "include"
+                    }
+                );
+
+                const data = await response.json();
+
+                console.log("Auth response:", data);
+
+                if (response.ok && data.success) {
+                    setUser(data.user);
+                } else {
+                    setUser(null);
                 }
-            );
-            const data = await response.json();
-            console.log(data);
-            if(response.ok && data.success){
-                setUser(data.user);
-            }else{
-                setUser(null)
+
+            } catch (err) {
+                console.error("Authentication check failed:", err);
+                setUser(null);
+            } finally {
+                setLoading(false);
             }
-        }catch(err){
-            console.error("Authentication check faild:", err);
-            setUser(null);
-        }
-        finally{
-            setLoading(false)
-        }
-      };
-      checkAuth();  
+        };
+
+        checkAuth();
     }, []);
 
-    if(loading){
-        return <h2>Checking authentication...</h2>;
-    };
+    // Loading spinner
+    if (loading) {
+    return (
+        <div
+            style={{
+                position: "fixed",
+                top: 100,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "flex-start",
+                paddingTop: "30px",
+                background: "rgba(15, 23, 42, 0.35)",
+                backdropFilter: "blur(4px)",
+                zIndex: 999999
+            }}
+        >
+            <div
+                style={{
+                    width: "45px",
+                    height: "45px",
+                    border: "5px solid #cbd5e1",
+                    borderTop: "5px solid #2563eb",
+                    borderRadius: "50%",
+                    animation: "spin 0.8s linear infinite"
+                }}
+            ></div>
 
-    // if user is not login
+            <style>
+                {`
+                    @keyframes spin {
+                        from {
+                            transform: rotate(0deg);
+                        }
+                        to {
+                            transform: rotate(360deg);
+                        }
+                    }
+                `}
+            </style>
+        </div>
+    );
+}
+
+    // User not logged in
     if(!user){
-        return <Navigate to="/login" replace />
-    }
+    return(
+        <>
+        <Navigate to="/login" replace state={{message: "Please login first!"}} />
+        </>
+    )
+}
 
-    // check required role
-    if(requiredRole && user.role !== requiredRole){
-        return <Navigate to="/profile" replace />
+    // Required role check
+    if (requiredRole && user.role !== requiredRole) {
+        return <Navigate to="/unauthorized" replace />;
     }
 
     // Authentication successful

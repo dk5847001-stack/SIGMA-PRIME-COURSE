@@ -63,6 +63,17 @@ app.get("/api/profile", async (req, res)=>{
     })
 })
 
+app.get("/api/auth/check", authMiddleware, async (req, res) => {
+
+    setTimeout(() => {
+        res.json({
+            success: true,
+            user: req.user
+        });
+    }, 3000); // 3 seconds delay
+
+});
+
 // -------------------- ADMIN ROUTE -------------------
 app.get("/admin/deshboard", (req, res)=>{
     res.status(200).json({

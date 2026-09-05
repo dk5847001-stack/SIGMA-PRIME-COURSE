@@ -1,15 +1,19 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 function Navbar() {
 
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
+    const location = useLocation();
+
+    const [authLoading, setAuthLoading] = useState(true);
+    const [logoutLoading, setLogoutLoading] = useState(false);
     const [user, setUser] = useState(null);
 
     useEffect(() => {
         const checkAuth = async () => {
             try {
+                console.log("Checking authentication...");
                 const response = await fetch("http://localhost:3000/api/profile",
                     {
                         method: "GET",
@@ -27,15 +31,18 @@ function Navbar() {
                 console.error("Authentication check faild:", err);
                 setUser(null);
             }
+            finally{
+                setAuthLoading(false);
+            }
         };
         checkAuth();
-    }, []);
+    }, [location.pathname]);
 
     const handleLogout = async () => {
 
         try {
 
-            setLoading(true);
+            setLogoutLoading(true);
 
             const response = await fetch(
                 "http://localhost:3000/logout",
@@ -48,6 +55,7 @@ function Navbar() {
             const data = await response.json();
 
             if (data.success) {
+                setUser(null);
                 navigate("/login");
             }
 
@@ -57,7 +65,7 @@ function Navbar() {
 
         } finally {
 
-            setLoading(false);
+            setLogoutLoading(false);
 
         }
     };
@@ -76,14 +84,13 @@ function Navbar() {
                     <Link to="/">
                         Home
                     </Link>
+                    {
+                        user && <Link to="/profile">Profile</Link>
+                    }
+                    {
+                        user?.role === "admin" &&  <Link to="/admin">Admin</Link>
+                    }
 
-                    <Link to="/profile">
-                        Profile
-                    </Link>
-
-                    <Link to="/admin">
-                        Admin
-                    </Link>
 
                     {
                         user ?
@@ -91,10 +98,10 @@ function Navbar() {
                          <span style={{color: "pink"}}>👋welcome {user.name}</span>
                          <button
                             onClick={handleLogout}
-                            disabled={loading}
+                            disabled={logoutLoading}
                             className="logout-btn"
                         >
-                            {loading ? "Logging out..." : "Logout"}
+                            {logoutLoading ? "Logging out..." : "Logout"}
                         </button></>
                         :
                         <><Link to="/login">Login</Link><Link to="/signup">Signup</Link></>
