@@ -8,6 +8,7 @@ import VerifyOTP from "./pages/VerifyOTP";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Admin from "./pages/Admin";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
     return (
@@ -24,9 +25,13 @@ function App() {
 
                 <Route path="/login" element={<Login />} />
 
+                <Route element={<ProtectedRoute/>}>
                 <Route path="/profile" element={<Profile />} />
+                </Route>
 
+                <Route element={<ProtectedRoute requiredRole="admin" />}>
                 <Route path="/admin" element={<Admin />} />
+                </Route>
 
             </Routes>
         </>
