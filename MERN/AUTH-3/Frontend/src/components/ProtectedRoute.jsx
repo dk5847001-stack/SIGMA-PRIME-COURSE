@@ -29,9 +29,51 @@ export default function ProtectedRoute({requiredRole}){
         checkAuth();
     }, []);
 
-    if(loading){
-        return <p>Checking Authentication.............</p>
-    }
+      // Loading spinner
+    if (loading) {
+    return (
+        <div
+            style={{
+                position: "fixed",
+                top: 100,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "flex-start",
+                paddingTop: "30px",
+                background: "rgba(15, 23, 42, 0.35)",
+                backdropFilter: "blur(4px)",
+                zIndex: 999999
+            }}
+        >
+            <div
+                style={{
+                    width: "45px",
+                    height: "45px",
+                    border: "5px solid #cbd5e1",
+                    borderTop: "5px solid #2563eb",
+                    borderRadius: "50%",
+                    animation: "spin 0.8s linear infinite"
+                }}
+            ></div>
+
+            <style>
+                {`
+                    @keyframes spin {
+                        from {
+                            transform: rotate(0deg);
+                        }
+                        to {
+                            transform: rotate(360deg);
+                        }
+                    }
+                `}
+            </style>
+        </div>
+    );
+}
 
     // if user is not login
     if(!user){
