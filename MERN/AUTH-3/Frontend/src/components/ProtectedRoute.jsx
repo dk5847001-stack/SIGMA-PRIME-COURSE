@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 
-export default function ProtectedRoute({requiredRole}){
+export default function ProtectedRoute({ requiredRole }) {
     const [user, setUser] = useState(null);
+    const location = useLocation();
     const [loading, setLoading] = useState(true);
-    useEffect(()=>{
+    useEffect(() => {
         const checkAuth = async () => {
             setLoading(true);
-            try{
+            try {
                 const response = await fetch("http://localhost:3000/api/profile",
                     {
                         method: "GET",
@@ -16,51 +17,51 @@ export default function ProtectedRoute({requiredRole}){
                 );
                 const data = await response.json();
                 console.log(data);
-                if(response.ok && data.success){
+                if (response.ok && data.success) {
                     setUser(data.user);
                 }
-            }catch(err){
+            } catch (err) {
                 console.error("Authentication check faild! : ", err)
             }
-            finally{
+            finally {
                 setLoading(false);
             }
         };
         checkAuth();
     }, []);
 
-      // Loading spinner
+    // Loading spinner
     if (loading) {
-    return (
-        <div
-            style={{
-                position: "fixed",
-                top: 100,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "flex-start",
-                paddingTop: "30px",
-                background: "rgba(15, 23, 42, 0.35)",
-                backdropFilter: "blur(4px)",
-                zIndex: 999999
-            }}
-        >
+        return (
             <div
                 style={{
-                    width: "45px",
-                    height: "45px",
-                    border: "5px solid #cbd5e1",
-                    borderTop: "5px solid #2563eb",
-                    borderRadius: "50%",
-                    animation: "spin 0.8s linear infinite"
+                    position: "fixed",
+                    top: 100,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "flex-start",
+                    paddingTop: "30px",
+                    background: "rgba(15, 23, 42, 0.35)",
+                    backdropFilter: "blur(4px)",
+                    zIndex: 999999
                 }}
-            ></div>
+            >
+                <div
+                    style={{
+                        width: "45px",
+                        height: "45px",
+                        border: "5px solid #cbd5e1",
+                        borderTop: "5px solid #2563eb",
+                        borderRadius: "50%",
+                        animation: "spin 0.8s linear infinite"
+                    }}
+                ></div>
 
-            <style>
-                {`
+                <style>
+                    {`
                     @keyframes spin {
                         from {
                             transform: rotate(0deg);
@@ -70,23 +71,31 @@ export default function ProtectedRoute({requiredRole}){
                         }
                     }
                 `}
-            </style>
-        </div>
-    );
-}
+                </style>
+            </div>
+        );
+    }
 
     // if user is not login
-    if(!user){
+    if (!user) {
         return (
             <>
-            <Navigate to="/login" replace state={{message: "Please login first!"}} />
+                <Navigate
+                    to="/login"
+                    replace
+                    state={{
+                        from: location,
+                        message: "Please login first!"
+                    }}
+                />
             </>
         )
     };
 
     // if user don't have required role
-    if(requiredRole && user.role !== requiredRole){
-       return <Navigate to="unauthorized" replace />
+    if (requiredRole && user.role !== requiredRole) {
+        return <Navigate to="unauthorized" replace />
     };
+
     return <Outlet />
 }

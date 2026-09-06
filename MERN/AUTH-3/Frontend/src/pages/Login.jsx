@@ -73,10 +73,10 @@ export default function Login() {
 
             if (response.ok && data.success) {
                 setMessage(data.message);
-
+                const redirectTo = location.state?.from?.pathname || "/profile";
                 // Don't put user object inside formData
                 setTimeout(() => {
-                    navigate("/profile", { replace: true });
+                    navigate(redirectTo, { replace: true });
                 }, 1000);
             } else {
                 setMessage(data.message);
